@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { auth, signInWithEmailAndPassword } from "../config/firebase";
+import { auth, signInWithEmailAndPassword } from "../../config/firebase";
 // Import necessary Firestore functions
 import { doc, getDoc } from "firebase/firestore";
-import { firestore } from "../config/firebase";
+import { db } from "../../config/firebase";
 import {
   Input,
   Button,
@@ -40,7 +40,7 @@ export const EmailLoginForm = () => {
       await signInWithEmailAndPassword(auth, email, password);
 
       // Check if the user exists in Firestore
-      const userRef = doc(firestore, "users", auth.currentUser.uid);
+      const userRef = doc(db, "users", auth.currentUser.uid);
       const userDoc = await getDoc(userRef);
 
       if (!userDoc.exists()) {
