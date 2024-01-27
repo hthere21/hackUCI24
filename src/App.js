@@ -10,6 +10,7 @@ import Login from "./components/CardLogin";
 import Signup from "./components/CardSignup";
 import Profile from "./pages/Profile";
 import AdditionalInfoForm from "./pages/AdditionalInfoForm";
+import ParentComponent from "./pages/ParentComponent";
 import { AuthProvider } from "./components/AuthContext";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Landing />} />
+            <Route path="/chat" element={<ParentComponent />} />
             <Route path="/home" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/loginSuccess" element={<LoginSuccess />} />

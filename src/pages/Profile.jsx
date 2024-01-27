@@ -34,7 +34,6 @@ function Profile() {
     fetchUserData();
   }, [user]);
 
-  console.log(userData);
   return (
     <>
       <Navbar />
@@ -60,7 +59,8 @@ function Profile() {
           <p>No user logged in.</p>
         )}
       </div>
-      <SignoutButton/>
+      <SignoutButton />
+      
     </>
   );
 }
