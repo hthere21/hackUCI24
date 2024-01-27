@@ -11,6 +11,7 @@ import Signup from "./components/CardSignup";
 import Profile from "./pages/Profile";
 import AdditionalInfoForm from "./pages/AdditionalInfoForm";
 import { AuthProvider } from "./components/AuthContext";
+import ListingsTest from "./pages/ListingsTest";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/additional-info" element={<AdditionalInfoForm />} />
+            <Route path="/listingsTest" element={<ListingsTest />} />
             {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
           </Routes>
         </Router>

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, doc, getDocs, query } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
 import {
@@ -26,7 +26,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const firestore = getFirestore(app); // Correct export for firestore
+export const db = getFirestore(app); // Correct export for firestore
 export const googleProvider = new GoogleAuthProvider();
 export {
   onAuthStateChanged,
@@ -36,5 +36,14 @@ export {
   setPersistence,
   createUserWithEmailAndPassword,
   browserLocalPersistence,
+  
 };
+
+export {
+  getFirestore,
+  collection,
+  doc,
+  getDocs,
+  query
+}
 // const analytics = getAnalytics(app);

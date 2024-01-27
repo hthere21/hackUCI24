@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "./AuthContext";
 import { doc, getDoc } from "firebase/firestore";
-import { firestore, auth } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 
 const UserProfile = () => {
   const { user, updateUser } = useAuth();
@@ -11,7 +11,7 @@ const UserProfile = () => {
       try {
         if (user) {
           // Create a reference to the user's document in the 'users' collection
-          const userDocRef = doc(firestore, "users", user.uid);
+          const userDocRef = doc(db, "users", user.uid);
 
           // Fetch the document data from Firestore
           const userDocSnapshot = await getDoc(userDocRef);
