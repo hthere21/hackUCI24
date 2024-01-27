@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import FilterBar from "../components/FilterBar";
+import CardListing from "../components/CardListing";
 import { db, collection, doc, getDocs, query } from "../config/firebase";
 
 function ListingsTest() {
@@ -45,6 +46,24 @@ function ListingsTest() {
     <>
       <Navbar />
       {/* <FilterBar /> */}
+
+      <Center>
+        <Stack flexDirection={"row"} spacing={6}>
+          {listings.map((element) => (
+            <CardListing
+              key={element.id}
+              name={element.name}
+              address={element.address}
+              city={element.city}
+              state={element.state}
+              zipcode={element.zip}
+              description={element.description}
+              price={element.price}
+              imageUrl={element.imageUrl}
+            />
+          ))}
+        </Stack>
+      </Center>
     </>
   );
 }

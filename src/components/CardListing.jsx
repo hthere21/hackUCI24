@@ -10,11 +10,11 @@ import {
 import React from "react";
 
 function CardListing(props) {
-  const { name, address, city, state, zipcode, floor_plan, price, imageUrl } =
+  const { name, address, city, state, zipcode, description, price, imageUrl } =
     props;
   return (
     <>
-      <Card maxW="sm" >
+      <Card maxW="sm">
         <CardBody>
           <Image
             src={imageUrl}
@@ -30,7 +30,7 @@ function CardListing(props) {
               <br />
               {city}, {state} {zipcode}
               <br />
-              {floor_plan} | {price}
+              {description} | {price}
             </Text>
           </Stack>
         </CardBody>
