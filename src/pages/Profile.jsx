@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "../config/firebase";
 import Navbar from "../components/Navbar";
 import UserProfile from "../components/UserProfile";
+import { SignoutButton } from "../components/SignoutButton";
 
 function Profile() {
   const { user } = useAuth();
@@ -59,6 +60,7 @@ function Profile() {
           <p>No user logged in.</p>
         )}
       </div>
+      <SignoutButton/>
     </>
   );
 }
