@@ -57,7 +57,7 @@ function ListingsTest() {
               city={element.city}
               state={element.state}
               zipcode={element.zip}
-              description={element.description}
+              type={element.type}
               price={element.price}
               imageUrl={element.imageUrl}
             />

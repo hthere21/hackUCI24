@@ -10,8 +10,7 @@ import {
 import React from "react";
 
 function CardListing(props) {
-  const { name, address, city, state, zipcode, description, price, imageUrl } =
-    props;
+  const { name, address, city, state, zipcode, type, price, imageUrl } = props;
   return (
     <>
       <Card maxW="sm">
@@ -30,7 +29,7 @@ function CardListing(props) {
               <br />
               {city}, {state} {zipcode}
               <br />
-              {description} | {price}
+              {type} | {price}
             </Text>
           </Stack>
         </CardBody>
