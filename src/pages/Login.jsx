@@ -1,14 +1,15 @@
 import * as React from "react";
 
-import {Container, Text} from "@chakra-ui/react";
+import { Container, Text, Button, Heading } from "@chakra-ui/react";
 import CardLogin from "../components/CardLogin";
+import { auth } from "../config/firebase";
 
 function Login() {
-    return (
-        <>
-            <CardLogin />
-        </>
-    );
+  return (
+    <>
+      <CardLogin />
+    </>
+  );
 }
 
 export default Login;

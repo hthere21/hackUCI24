@@ -13,7 +13,7 @@ import {
   Avatar,
   FormControl,
   FormHelperText,
-  InputRightElement
+  InputRightElement,
 } from "@chakra-ui/react";
 
 // import {
@@ -23,46 +23,48 @@ import {
 // import { FaUserAlt, FaLock } from "react-icons/fa";
 import { GoogleLoginButton } from "./GoogleLoginButton";
 import { EmailLoginForm } from "./EmailLoginForm";
-
+import { SignoutButton } from "./SignoutButton";
 
 // const CFaUserAlt = chakra(FaUserAlt);
 // const CFaLock = chakra(FaLock);
 
- function CardLogin(){
-    return (
-      <Flex
-        flexDirection="column"
-        width="100wh"
-        height="100vh"
-        backgroundColor="gray.200"
+function CardLogin() {
+  return (
+    <Flex
+      flexDirection="column"
+      width="100wh"
+      height="100vh"
+      backgroundColor="gray.200"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Stack
+        flexDir="column"
+        mb="2"
         justifyContent="center"
         alignItems="center"
       >
-        <Stack
-          flexDir="column"
-          mb="2"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Avatar bg="teal.500" />
-          <Heading color="teal.400">Login</Heading>
-          <Box minW={{ base: "90%", md: "468px" }}>
-            <EmailLoginForm/>
-          </Box>
-        </Stack>
-
-        <Box>
-            <GoogleLoginButton/>
-          </Box>
-
-        <Box>
-          New to us?{" "}
-          <Link color="teal.500" href="/signup">
-            Sign Up
-          </Link>
+        <Avatar bg="teal.500" />
+        <Heading color="teal.400">Login</Heading>
+        <Box minW={{ base: "90%", md: "468px" }}>
+          <EmailLoginForm />
         </Box>
-      </Flex>
-    );
-  };
+      </Stack>
+
+      <Box>
+        <GoogleLoginButton />
+      </Box>
+
+      <Box>
+        New to us?{" "}
+        <Link color="teal.500" href="/signup">
+          Sign Up
+        </Link>
+      </Box>
+
+      <SignoutButton />
+    </Flex>
+  );
+}
 
 export default CardLogin;

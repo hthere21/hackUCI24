@@ -34,6 +34,13 @@ export const EmailLoginForm = () => {
   const handleSignInWithEmail = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      toast({
+        title: "Login Successful",
+        description: "debug use only",
+        status: "success",
+        duration: 1000,
+        isClosable: true,
+      });
     } catch (err) {
       console.error(err);
 

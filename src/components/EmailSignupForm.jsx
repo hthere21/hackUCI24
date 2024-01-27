@@ -32,6 +32,12 @@ export const EmailSignupForm = () => {
   const handleSignUpWithEmail = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      toast({
+        title: "Signup Successful",
+        status: "success",
+        duration: 1000,
+        isClosable: true,
+      });
     } catch (err) {
       console.error(err);
 
