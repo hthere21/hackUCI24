@@ -1,6 +1,8 @@
-import { Button } from "@chakra-ui/react";
+import { Button, useToast } from "@chakra-ui/react";
 
 import { GoogleIcon } from "./GoogleIcon";
+
+import { useNavigate } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 
@@ -15,8 +17,8 @@ import {
 } from "../config/firebase";
 
 export const GoogleLoginButton = () => {
-  // const [email, setEmail] = useState("");
-  // const [warning, setWarning] = useState("");
+  const toast = useToast();
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   console.log("Currently signed in user: " + auth?.currentUser?.uid);
 
@@ -45,27 +47,34 @@ export const GoogleLoginButton = () => {
         // hd: 'uci.edu'
       });
       await signInWithPopup(auth, googleProvider);
+      toast({
+        title: "Login Successful",
+        description: "debug use only",
+        status: "success",
+        duration: 1000,
+        isClosable: true,
+      });
+      navigate("/home");
     } catch (err) {
       console.error(err);
+
+      let errorMessage = "An unknown error occurred.";
+
+      if (err.code === "auth/invalid-credential") {
+        errorMessage = "This email is invalid.";
+      } else if (err.code === "auth/wrong-password") {
+        errorMessage = "The password is incorrect.";
+      }
+
+      toast({
+        title: "Login Failed",
+        description: errorMessage,
+        status: "error",
+        duration: 1000,
+        isClosable: true,
+      });
     }
   };
-
-  //   const handleSignOut = async () => {
-  //     try {
-  //         console.log("Clicked Signout")
-  //         await signOut(auth);
-  //         localStorage.clear();
-  //         sessionStorage.clear();
-
-  //         setPersistence(auth, browserLocalPersistence).then(() => {
-  //             // Redirect or perform any additional actions if needed
-  //             window.location.reload();
-  //         });
-  //     } catch (err) {
-  //         console.error(err);
-  //     }
-
-  //   };
 
   return (
     <Button onClick={handleSignInWithGoogle} marginTop={3} marginBottom={3}>

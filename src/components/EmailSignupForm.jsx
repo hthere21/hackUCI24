@@ -34,6 +34,7 @@ export const EmailSignupForm = () => {
       await createUserWithEmailAndPassword(auth, email, password);
       toast({
         title: "Signup Successful",
+        description: "debug use only",
         status: "success",
         duration: 1000,
         isClosable: true,

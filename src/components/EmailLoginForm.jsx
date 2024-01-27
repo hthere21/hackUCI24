@@ -41,6 +41,7 @@ export const EmailLoginForm = () => {
         duration: 1000,
         isClosable: true,
       });
+      navigate("/home");
     } catch (err) {
       console.error(err);
 
