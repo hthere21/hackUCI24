@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { auth, signInWithEmailAndPassword } from "../../config/firebase";
+import { auth, signInWithEmailAndPassword } from "../config/firebase";
 // Import necessary Firestore functions
 import { doc, getDoc } from "firebase/firestore";
-import { firestore } from "../../config/firebase";
+import { firestore } from "../config/firebase";
 import {
   Input,
   Button,

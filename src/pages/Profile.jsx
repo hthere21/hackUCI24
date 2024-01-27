@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
-import { firestore } from "../config/firebase";
+import { db } from "../config/firebase";
 import Navbar from "../components/Navbar";
 import UserProfile from "../components/UserProfile";
 import { SignoutButton } from "../components/SignoutButton";
@@ -15,7 +15,7 @@ function Profile() {
       try {
         if (user) {
           // Create a reference to the user's document in the 'users' collection
-          const userDocRef = doc(firestore, "users", user.uid);
+          const userDocRef = doc(db, "users", user.uid);
 
           // Fetch the document data from Firestore
           const userDocSnapshot = await getDoc(userDocRef);
@@ -60,7 +60,7 @@ function Profile() {
           <p>No user logged in.</p>
         )}
       </div>
-      <SignoutButton/>
+      <SignoutButton />
     </>
   );
 }

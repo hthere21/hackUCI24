@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { firestore, auth } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 
 const AdditionalInfoForm = () => {
   const [name, setName] = useState("");
@@ -14,7 +14,7 @@ const AdditionalInfoForm = () => {
   const handleSubmit = async () => {
     try {
       // Create a Firestore document for the user
-      const userRef = doc(firestore, "users", auth.currentUser.uid);
+      const userRef = doc(db, "users", auth.currentUser.uid);
       await setDoc(userRef, {
         name,
         age,
