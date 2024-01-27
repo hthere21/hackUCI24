@@ -8,8 +8,9 @@ import {
   Stack,
   InputLeftElement,
   chakra,
+  Center,
   Link,
-  // Avatar,
+  Text,
   FormControl,
   FormHelperText,
   InputRightElement,
@@ -126,6 +127,14 @@ export const EmailLoginForm = () => {
         >
           Login
         </Button>
+        <Center>
+          <Stack flexDirection={"row"} spacing={6}>
+            <Text>New to us?</Text>
+            <Link color="blue.500" href="/signup">
+              Sign Up
+            </Link>
+          </Stack>
+        </Center>
       </Stack>
     </form>
   );
