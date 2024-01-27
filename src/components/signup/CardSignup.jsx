@@ -5,23 +5,23 @@ import {
   Stack,
   Box,
   Avatar,
-  Center,
   Container,
+  Center,
 } from "@chakra-ui/react";
 
-// import {
-//   useNavigate,
-// } from "react-router-dom";
-
 // import { FaUserAlt, FaLock } from "react-icons/fa";
-import { GoogleLoginButton } from "./GoogleLoginButton";
-import { EmailLoginForm } from "./EmailLoginForm";
-import { SignoutButton } from "./SignoutButton";
+// import { GoogleLoginButton } from "./GoogleLoginButton";
+import { EmailSignupForm } from "./EmailSignupForm";
+import { SignoutButton } from "../SignoutButton";
 
 // const CFaUserAlt = chakra(FaUserAlt);
 // const CFaLock = chakra(FaLock);
 
-function CardLogin() {
+const CardSignup = () => {
+  // const [showPassword, setShowPassword] = useState(false);
+
+  // const handleShowClick = () => setShowPassword(!showPassword);
+
   return (
     <Container maxW={"-moz-max-content"} p={0}>
       <Box
@@ -73,22 +73,18 @@ function CardLogin() {
                   "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"
                 }
               >
-                Login
+                Welcome
               </Heading>
               <Box minW={{ base: "90%", md: "468px" }}>
-                <EmailLoginForm />
+                <EmailSignupForm />
               </Box>
+              <SignoutButton />
             </Stack>
-
-            <Box>
-              <GoogleLoginButton />
-            </Box>
-            <SignoutButton />
           </Flex>
         </Center>
       </Box>
     </Container>
   );
-}
+};
 
-export default CardLogin;
+export default CardSignup;

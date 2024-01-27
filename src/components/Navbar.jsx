@@ -3,6 +3,7 @@ import { Box, Button, Flex, Heading, Spacer, Center } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 import { useAuth } from "./AuthContext";
+import { SignoutButton } from "../components/SignoutButton";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -37,24 +38,92 @@ function Navbar() {
     <>
       <Box top="0" left="0" right="0" zIndex="999" bg="white" boxShadow="sm">
         <Flex p={4}>
+          
+          {/* Logout Button */}
+          {user ? (
+              <SignoutButton/>
+            ) : (
+              null
+          )}
+
           <Spacer />
+          
+          {/* Logo and Brand Name */}
           <Center>
             <Heading size="lg" fontWeight="bold">
               ZotLease
             </Heading>
           </Center>
+
           <Spacer />
 
-          <Button
-            size="md"
-            marginRight={10}
-            borderLeftRadius={3.3}
-            borderRightRadius={3.3}
-            fontSize={20}
-            onClick={() => navigate(user ? "/profile" : "/login")}
-          >
-            {user ? "Profile" : "Login"}
-          </Button>
+          {/* Menu Bar / Login */}
+          {user ? (
+            <>
+              <Button
+                size="md"
+                marginRight={2}
+                borderLeftRadius={3.3}
+                borderRightRadius={3.3}
+                fontSize={20}
+                onClick={() => navigate("/home")}
+              >
+                Home
+              </Button>
+              <Button
+                size="md"
+                marginRight={2}
+                borderLeftRadius={3.3}
+                borderRightRadius={3.3}
+                fontSize={20}
+                onClick={() => navigate("/profile")}
+              >
+                Profile
+              </Button>
+              <Button
+                size="md"
+                marginRight={2}
+                borderLeftRadius={3.3}
+                borderRightRadius={3.3}
+                fontSize={20}
+                onClick={() => navigate("/manage-sublets")}
+              >
+                Manage Sublets
+              </Button>
+              <Button
+                size="md"
+                marginRight={2}
+                borderLeftRadius={3.3}
+                borderRightRadius={3.3}
+                fontSize={20}
+                onClick={() => navigate("/likes")}
+              >
+                Likes
+              </Button>
+              <Button
+                size="md"
+                marginRight={5}
+                borderLeftRadius={3.3}
+                borderRightRadius={3.3}
+                fontSize={20}
+                onClick={() => navigate("/post")}
+              >
+                Post
+              </Button>
+            </>
+          ) : (
+            <Button
+              size="md"
+              marginRight={5}
+              borderLeftRadius={3.3}
+              borderRightRadius={3.3}
+              fontSize={20}
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </Button>
+          )}
+
         </Flex>
       </Box>
     </>

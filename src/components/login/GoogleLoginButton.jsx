@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, useToast } from "@chakra-ui/react";
 import { GoogleIcon } from "./GoogleIcon";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../AuthContext";
 import {
   auth,
   googleProvider,
@@ -11,7 +11,7 @@ import {
   // signOut,
   // setPersistence,
   // browserLocalPersistence,
-} from "../config/firebase";
+} from "../../config/firebase";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firestore = getFirestore();
@@ -32,20 +32,20 @@ export const GoogleLoginButton = () => {
         const userRef = doc(firestore, "users", currentUser.uid);
         const userDoc = await getDoc(userRef);
 
-        if (!userDoc.exists()) {
-          // User doesn't exist in Firestore, prompt them to fill out a form
-          navigate("/additional-info");
-        } else {
-          // User exists, proceed to the home page
-          toast({
-            title: "Login Successful",
-            description: "debug use only",
-            status: "success",
-            duration: 1000,
-            isClosable: true,
-          });
+        // if (!userDoc.exists()) {
+        //   // User doesn't exist in Firestore, prompt them to fill out a form
+        //   navigate("/additional-info");
+        // } else {
+        //   // User exists, proceed to the home page
+        //   toast({
+        //     title: "Login Successful",
+        //     description: "debug use only",
+        //     status: "success",
+        //     duration: 1000,
+        //     isClosable: true,
+        //   });
           navigate("/home");
-        }
+        // }
       } else {
 
         // User is signed out
