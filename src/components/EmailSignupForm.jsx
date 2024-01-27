@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { auth, signInWithEmailAndPassword } from "../config/firebase";
+import { auth, createUserWithEmailAndPassword } from "../config/firebase";
 
 import {
   Input,
@@ -8,9 +8,7 @@ import {
   Stack,
   InputLeftElement,
   chakra,
-  Link,
   FormControl,
-  FormHelperText,
   InputRightElement,
   useToast,
 } from "@chakra-ui/react";
@@ -22,7 +20,7 @@ import { FaUserAlt, FaLock } from "react-icons/fa";
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-export const EmailLoginForm = () => {
+export const EmailSignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -31,22 +29,22 @@ export const EmailLoginForm = () => {
 
   const toast = useToast();
 
-  const handleSignInWithEmail = async () => {
+  const handleSignUpWithEmail = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (err) {
       console.error(err);
 
       let errorMessage = "An unknown error occurred.";
 
-      if (err.code === "auth/invalid-credential") {
-        errorMessage = "This email is invalid.";
-      } else if (err.code === "auth/wrong-password") {
-        errorMessage = "The password is incorrect.";
+      if (err.code === "auth/email-already-in-use") {
+        errorMessage = "This email is already in use.";
+      } else if (err.code === "auth/weak-password") {
+        errorMessage = "Password should at least be 6 characters.";
       }
 
       toast({
-        title: "Login Failed",
+        title: "Sign Up Failed",
         description: errorMessage,
         status: "error",
         duration: 1000,
@@ -101,10 +99,6 @@ export const EmailLoginForm = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
-
-          <FormHelperText textAlign="right">
-            <Link>forgot password?</Link>
-          </FormHelperText>
         </FormControl>
 
         <Button
@@ -112,9 +106,9 @@ export const EmailLoginForm = () => {
           variant="solid"
           colorScheme="teal"
           width="full"
-          onClick={handleSignInWithEmail}
+          onClick={handleSignUpWithEmail}
         >
-          Login
+          Sign Up
         </Button>
       </Stack>
     </form>

@@ -8,8 +8,9 @@ import {
   signOut,
   signInWithPopup,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -19,12 +20,20 @@ const firebaseConfig = {
   storageBucket: "hackuci2024.appspot.com",
   messagingSenderId: "389859786270",
   appId: "1:389859786270:web:df926aa4204a9e3033780f",
-  measurementId: "G-5DNSH3R72J"
+  measurementId: "G-5DNSH3R72J",
 };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-export { onAuthStateChanged, signInWithPopup, signOut, signInWithEmailAndPassword, setPersistence, browserLocalPersistence };
+export {
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  signInWithEmailAndPassword,
+  setPersistence,
+  createUserWithEmailAndPassword,
+  browserLocalPersistence,
+};
 
-// const analytics = getAnalytics(app); 
+// const analytics = getAnalytics(app);
