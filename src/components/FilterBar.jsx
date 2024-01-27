@@ -58,8 +58,6 @@ function FilterBar() {
           </HStack>
         </Flex>
       </Box>
-
-      <Box p={4}>Main Content Here</Box>
     </>
   );
 }

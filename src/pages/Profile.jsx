@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import Navbar from "../components/Navbar";
 import UserProfile from "../components/UserProfile";
-import { SignoutButton } from "../components/SignoutButton";
+import CardUser from "../components/CardUser";
 
 function Profile() {
   const { user } = useAuth();
@@ -37,8 +37,12 @@ function Profile() {
   console.log(userData);
   return (
     <>
+      {/* NavBar */}
       <Navbar />
-      <button onClick={() => window.history.back()}>Go Back to Home</button>
+
+      {/* Profile Card (Name, Gender, Age, Email) */}
+      <CardUser />
+
       <div>
         {user ? (
           <div>
@@ -60,7 +64,6 @@ function Profile() {
           <p>No user logged in.</p>
         )}
       </div>
-      <SignoutButton />
     </>
   );
 }

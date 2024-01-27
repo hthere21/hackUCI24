@@ -39,6 +39,8 @@ const UserProfile = () => {
   }, [user, updateUser]);
 
   return (
+    
+    
     <div>
       <h2>User Profile</h2>
       {user && (
