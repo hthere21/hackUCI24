@@ -13,7 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { FaUserAlt, FaLock } from "react-icons/fa";
 
@@ -24,7 +24,7 @@ export const EmailSignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const toast = useToast();

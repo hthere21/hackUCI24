@@ -11,9 +11,9 @@ import {
   googleProvider,
   onAuthStateChanged,
   signInWithPopup,
-  signOut,
-  setPersistence,
-  browserLocalPersistence,
+  // signOut,
+  // setPersistence,
+  // browserLocalPersistence,
 } from "../config/firebase";
 
 export const GoogleLoginButton = () => {

@@ -1,33 +1,24 @@
-import { useState } from "react";
+// import { useState } from "react";
 import {
   Flex,
   Heading,
-  Input,
-  Button,
-  InputGroup,
   Stack,
-  InputLeftElement,
-  chakra,
   Box,
-  Link,
   Avatar,
-  FormControl,
-  FormHelperText,
-  InputRightElement,
 } from "@chakra-ui/react";
 
-import { FaUserAlt, FaLock } from "react-icons/fa";
-import { GoogleLoginButton } from "./GoogleLoginButton";
+// import { FaUserAlt, FaLock } from "react-icons/fa";
+// import { GoogleLoginButton } from "./GoogleLoginButton";
 import { EmailSignupForm } from "./EmailSignupForm";
 import { SignoutButton } from "./SignoutButton";
 
-const CFaUserAlt = chakra(FaUserAlt);
-const CFaLock = chakra(FaLock);
+// const CFaUserAlt = chakra(FaUserAlt);
+// const CFaLock = chakra(FaLock);
 
 const CardSignup = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
 
-  const handleShowClick = () => setShowPassword(!showPassword);
+  // const handleShowClick = () => setShowPassword(!showPassword);
 
   return (
     <Flex
