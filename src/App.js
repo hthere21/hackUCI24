@@ -7,6 +7,8 @@ import LoginSuccess from "./pages/LoginSuccess";
 import SearchListings from "./pages/SearchListings";
 import Listings from "./pages/Listings";
 import Login from "./components/CardLogin";
+import Signup from "./components/CardSignup";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/loginSuccess" element={<LoginSuccess />} />
           <Route path="/searchResults" element={<SearchListings />} />
           <Route path="/allListings" element={<Listings />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
           {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
         </Routes>
       </Router>

@@ -1,14 +1,14 @@
 import * as React from "react";
 
 import {Container, Text} from "@chakra-ui/react";
-import CardLogin from "../components/CardLogin";
+import CardSignup from "../components/CardSignup";
 
-function Login() {
+function Signup() {
     return (
         <>
-            <CardLogin />
+            <CardSignup />
         </>
     );
 }
 
-export default Login;
+export default Signup;

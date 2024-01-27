@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
   signOut,
   signInWithPopup,
+  signInWithEmailAndPassword,
   setPersistence,
   browserLocalPersistence
 } from "firebase/auth";
@@ -24,6 +25,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-export { onAuthStateChanged, signInWithPopup, signOut, setPersistence, browserLocalPersistence };
+export { onAuthStateChanged, signInWithPopup, signOut, signInWithEmailAndPassword, setPersistence, browserLocalPersistence };
 
 // const analytics = getAnalytics(app); 
