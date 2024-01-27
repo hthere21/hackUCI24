@@ -42,12 +42,11 @@ function Profile() {
         {user ? (
           <div>
             <p>User Information:</p>
-            <p>Name: {userData.name}</p>
-            <p>Age: {userData.age}</p>
             <p>Email: {user.email}</p>
             {userData && (
               <div>
                 <p>Additional Information:</p>
+                <p>Name: {userData.name}</p>
                 <p>Age: {userData.age}</p>
                 <p>Gender: {userData.gender}</p>
                 <p>University: {userData.university}</p>
