@@ -10,7 +10,9 @@ import {
   Stack,
   InputLeftElement,
   chakra,
+  Center,
   Link,
+  Text,
   FormControl,
   FormHelperText,
   InputRightElement,
@@ -84,9 +86,10 @@ export const EmailLoginForm = () => {
     <form>
       <Stack
         spacing={4}
-        p="1rem"
+        p="1.5rem"
         backgroundColor="whiteAlpha.900"
         boxShadow="md"
+        borderRadius={15}
       >
         <FormControl>
           <InputGroup>
@@ -129,7 +132,7 @@ export const EmailLoginForm = () => {
         </FormControl>
 
         <Button
-          borderRadius={0}
+          borderRadius={10}
           variant="solid"
           colorScheme="teal"
           width="full"
@@ -137,6 +140,14 @@ export const EmailLoginForm = () => {
         >
           Login
         </Button>
+        <Center>
+          <Stack flexDirection={"row"} spacing={6}>
+            <Text>New to us?</Text>
+            <Link color="blue.500" href="/signup">
+              Sign Up
+            </Link>
+          </Stack>
+        </Center>
       </Stack>
     </form>
   );

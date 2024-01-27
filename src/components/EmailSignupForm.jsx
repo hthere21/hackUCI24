@@ -4,6 +4,9 @@ import { auth, createUserWithEmailAndPassword } from "../config/firebase";
 import {
   Input,
   Button,
+  Text,
+  Link,
+  Center,
   InputGroup,
   Stack,
   InputLeftElement,
@@ -68,9 +71,10 @@ export const EmailSignupForm = () => {
     <form>
       <Stack
         spacing={4}
-        p="1rem"
+        p="1.5rem"
         backgroundColor="whiteAlpha.900"
         boxShadow="md"
+        borderRadius={15}
       >
         <FormControl>
           <InputGroup>
@@ -109,7 +113,7 @@ export const EmailSignupForm = () => {
         </FormControl>
 
         <Button
-          borderRadius={0}
+          borderRadius={10}
           variant="solid"
           colorScheme="teal"
           width="full"
@@ -117,6 +121,14 @@ export const EmailSignupForm = () => {
         >
           Sign Up
         </Button>
+        <Center>
+          <Stack flexDirection={"row"} spacing={6}>
+            <Text>Already have an account?</Text>
+            <Link color="blue.500" href="/login">
+              Log in
+            </Link>
+          </Stack>
+        </Center>
       </Stack>
     </form>
   );

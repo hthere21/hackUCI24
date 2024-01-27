@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, FormControl, Input, Select, Stack } from "@chakra-ui/react";
+import { Flex, FormControl, Input, Select, Stack } from "@chakra-ui/react";
 
 function FilterBar() {
   return (
@@ -18,7 +18,15 @@ function FilterBar() {
             <FormControl>
               <Input type="email" placeholder="location" textColor={"white"} />
             </FormControl>
-            <Select placeholder="Select country">
+            <Select placeholder="Beds">
+              <option>United Arab Emirates</option>
+              <option>Nigeria</option>
+            </Select>
+            <Select placeholder="Prices">
+              <option>United Arab Emirates</option>
+              <option>Nigeria</option>
+            </Select>
+            <Select placeholder="Date">
               <option>United Arab Emirates</option>
               <option>Nigeria</option>
             </Select>

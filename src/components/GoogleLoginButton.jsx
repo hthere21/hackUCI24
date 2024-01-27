@@ -47,11 +47,19 @@ export const GoogleLoginButton = () => {
           navigate("/home");
         }
       } else {
+
+        // User is signed out
+//         console.log(user);
+//         console.log("User signed out");
+//         setUser(null);
+// =======
         updateUser(null);
       }
     });
 
     return () => unsubscribe();
+
+//   });
   }, [updateUser, navigate]);
 
   const handleSignInWithGoogle = async () => {

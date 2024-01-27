@@ -25,7 +25,7 @@ export const SignoutButton = () => {
 
   return (
     <>
-      <Button onClick={handleSignOut}>Sign Out</Button>
+      <Button marginTop={2} onClick={handleSignOut}>Sign Out</Button>
     </>
   );
 };
