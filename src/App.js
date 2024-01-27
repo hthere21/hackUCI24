@@ -9,24 +9,29 @@ import Listings from "./pages/Listings";
 import Login from "./components/CardLogin";
 import Signup from "./components/CardSignup";
 import Profile from "./pages/Profile";
+import AdditionalInfoForm from "./pages/AdditionalInfoForm";
+import { AuthProvider } from "./components/AuthContext";
 
 function App() {
   return (
-    <ChakraProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/home" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/loginSuccess" element={<LoginSuccess />} />
-          <Route path="/searchResults" element={<SearchListings />} />
-          <Route path="/allListings" element={<Listings />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
-        </Routes>
-      </Router>
-    </ChakraProvider>
+    <AuthProvider>
+      <ChakraProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/home" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/loginSuccess" element={<LoginSuccess />} />
+            <Route path="/searchResults" element={<SearchListings />} />
+            <Route path="/allListings" element={<Listings />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/additional-info" element={<AdditionalInfoForm />} />
+            {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
+          </Routes>
+        </Router>
+      </ChakraProvider>
+    </AuthProvider>
   );
 }
 
