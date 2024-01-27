@@ -31,6 +31,7 @@ export const GoogleLoginButton = () => {
         setUser(currentUser);
       } else {
         // User is signed out
+        console.log(user);
         console.log("User signed out");
         setUser(null);
       }
@@ -38,7 +39,7 @@ export const GoogleLoginButton = () => {
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [auth]);
+  });
 
   const handleSignInWithGoogle = async () => {
     try {

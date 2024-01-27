@@ -9,6 +9,7 @@ import {
   InputLeftElement,
   chakra,
   Link,
+  // Avatar,
   FormControl,
   FormHelperText,
   InputRightElement,
@@ -71,9 +72,10 @@ export const EmailLoginForm = () => {
     <form>
       <Stack
         spacing={4}
-        p="1rem"
+        p="1.5rem"
         backgroundColor="whiteAlpha.900"
         boxShadow="md"
+        borderRadius={15}
       >
         <FormControl>
           <InputGroup>
@@ -116,7 +118,7 @@ export const EmailLoginForm = () => {
         </FormControl>
 
         <Button
-          borderRadius={0}
+          borderRadius={10}
           variant="solid"
           colorScheme="teal"
           width="full"
