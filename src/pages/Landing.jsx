@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 // import { useState } from "react";
 import { Text, Center, Button, Stack } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
@@ -8,12 +9,13 @@ import apartmentData from "../fakeApartmentData";
 
 function Landing() {
   //   const [login, setLogin] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       {/* Navigation bar */}
       <Navbar />
       {/* image overlay with search */}
-      <ImageOverlay/>
+      <ImageOverlay />
 
       {/* explore heading */}
       <Center marginTop={10} marginBottom={10}>
@@ -49,6 +51,7 @@ function Landing() {
           borderLeftRadius={3.3}
           borderRightRadius={3.3}
           fontSize={20}
+          onClick={() => navigate("/allListings")}
         >
           See More
         </Button>

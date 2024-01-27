@@ -29,10 +29,6 @@ import { EmailLoginForm } from "./EmailLoginForm";
 // const CFaLock = chakra(FaLock);
 
  function CardLogin(){
-
-
-    
-
     return (
       <Flex
         flexDirection="column"
