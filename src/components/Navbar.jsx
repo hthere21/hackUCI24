@@ -9,29 +9,29 @@ function Navbar() {
   const { user, updateUser } = useAuth();
 
   useEffect(() => {
-    // Check if there is a user stored in local storage
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (storedUser) {
+    // Avoid updating user in local storage if it's the same as the current user
+    if (storedUser && storedUser.uid !== user?.uid) {
       updateUser(storedUser);
     }
 
-    // Optional: Set up a listener for auth state changes
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
         updateUser(currentUser);
-        // Store the user in local storage
-        localStorage.setItem("user", JSON.stringify(currentUser));
+
+        // Avoid updating local storage if the user is the same
+        if (currentUser.uid !== storedUser?.uid) {
+          localStorage.setItem("user", JSON.stringify(currentUser));
+        }
       } else {
         updateUser(null);
-        // Remove the user from local storage
         localStorage.removeItem("user");
       }
     });
 
-    // Cleanup function to unsubscribe from the listener when the component unmounts
     return () => unsubscribe();
-  }, [updateUser]);
+  }, [user, updateUser]); // Include user and updateUser in the dependency array
 
   return (
     <>
