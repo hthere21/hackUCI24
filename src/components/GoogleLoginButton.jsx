@@ -1,11 +1,8 @@
+import React, { useEffect } from "react";
 import { Button, useToast } from "@chakra-ui/react";
-
 import { GoogleIcon } from "./GoogleIcon";
-
 import { useNavigate } from "react-router-dom";
-
-import React, { useEffect, useState } from "react";
-
+import { useAuth } from "./AuthContext";
 import {
   auth,
   googleProvider,
@@ -15,47 +12,64 @@ import {
   // setPersistence,
   // browserLocalPersistence,
 } from "../config/firebase";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
+const firestore = getFirestore();
 
 export const GoogleLoginButton = () => {
   const toast = useToast();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  console.log("Currently signed in user: " + auth?.currentUser?.uid);
+  const { user, updateUser } = useAuth();
+
+  console.log("Currently signed in user: " + user?.uid);
 
   useEffect(() => {
-    // This listener is called every time the user's sign-in status changes.
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        // User is signed in
-        // console.log(currentUser.uid);
-        setUser(currentUser);
+        updateUser(currentUser);
+
+        // Check if the user exists in Firestore
+        const userRef = doc(firestore, "users", currentUser.uid);
+        const userDoc = await getDoc(userRef);
+
+        if (!userDoc.exists()) {
+          // User doesn't exist in Firestore, prompt them to fill out a form
+          navigate("/additional-info");
+        } else {
+          // User exists, proceed to the home page
+          toast({
+            title: "Login Successful",
+            description: "debug use only",
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+          });
+          navigate("/home");
+        }
       } else {
+
         // User is signed out
-        console.log(user);
-        console.log("User signed out");
-        setUser(null);
+//         console.log(user);
+//         console.log("User signed out");
+//         setUser(null);
+// =======
+        updateUser(null);
       }
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
-  });
+
+//   });
+  }, [updateUser, navigate]);
 
   const handleSignInWithGoogle = async () => {
     try {
       googleProvider.setCustomParameters({
         prompt: "select_account",
-        // hd: 'uci.edu'
       });
       await signInWithPopup(auth, googleProvider);
-      toast({
-        title: "Login Successful",
-        description: "debug use only",
-        status: "success",
-        duration: 1000,
-        isClosable: true,
-      });
-      navigate("/home");
+
+      // User will be redirected to the form if not found in Firestore
     } catch (err) {
       console.error(err);
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { auth, signInWithEmailAndPassword } from "../config/firebase";
-
+// Import necessary Firestore functions
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "../config/firebase";
 import {
   Input,
   Button,
@@ -36,14 +38,25 @@ export const EmailLoginForm = () => {
   const handleSignInWithEmail = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast({
-        title: "Login Successful",
-        description: "debug use only",
-        status: "success",
-        duration: 1000,
-        isClosable: true,
-      });
-      navigate("/home");
+
+      // Check if the user exists in Firestore
+      const userRef = doc(firestore, "users", auth.currentUser.uid);
+      const userDoc = await getDoc(userRef);
+
+      if (!userDoc.exists()) {
+        // User doesn't exist in Firestore, prompt them to fill out a form
+        navigate("/additional-info");
+      } else {
+        // User exists, proceed to the home page
+        toast({
+          title: "Login Successful",
+          description: "debug use only",
+          status: "success",
+          duration: 1000,
+          isClosable: true,
+        });
+        navigate("/home");
+      }
     } catch (err) {
       console.error(err);
 

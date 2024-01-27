@@ -1,26 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Flex, Heading, Spacer, Center } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
+import { useAuth } from "./AuthContext";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user, updateUser } = useAuth();
 
   useEffect(() => {
-    const checkUser = () => {
-      const currentUser = auth.currentUser;
-      setUser(currentUser);
-    };
+    const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    checkUser();
+    // Avoid updating user in local storage if it's the same as the current user
+    if (storedUser && storedUser.uid !== user?.uid) {
+      updateUser(storedUser);
+    }
 
-    // Optional: Set up a listener for auth state changes
-    // const unsubscribe = auth.onAuthStateChanged(checkUser);
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      if (currentUser) {
+        updateUser(currentUser);
 
-    // Cleanup function to unsubscribe from listener when component unmounts
-    // return unsubscribe;
-  }, []);
+        // Avoid updating local storage if the user is the same
+        if (currentUser.uid !== storedUser?.uid) {
+          localStorage.setItem("user", JSON.stringify(currentUser));
+        }
+      } else {
+        updateUser(null);
+        localStorage.removeItem("user");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user, updateUser]); // Include user and updateUser in the dependency array
 
   return (
     <>
