@@ -271,6 +271,8 @@ const CollectionListForm = () => {
                     color="white"
                     // textShadow={"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}
                     textShadow={"2px 2px 5px black"}
+                    fontFamily={"New Century Schoolbook"}
+                    fontSize={43}
                   >
                     Listing Form
                   </Heading>

@@ -40,7 +40,7 @@ function ListingWithMap({ listings }) {
   return (
     <SimpleGrid columns={2} spacing={2}>
       {/* All the card listings */}
-      <Box w="100%" h="100vh">
+      <Box w="100%">
         {listings.map((element) => (
           <Card
             key={element.id}
@@ -95,7 +95,6 @@ function ListingWithMap({ listings }) {
       {selectedElement ? (
         <Box
           width="100%"
-          height={"100vh"}
           margin={0}
           padding={0}
           backgroundColor={"#EAEAEA"}
@@ -151,7 +150,6 @@ function ListingWithMap({ listings }) {
       ) : (
         <Box
           width="100%"
-          height={"100vh"}
           margin={0}
           padding={0}
           backgroundColor={"#EAEAEA"}

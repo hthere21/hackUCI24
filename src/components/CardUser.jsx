@@ -213,6 +213,7 @@ const CardUser = () => {
                   "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"
                 }
                 fontSize="5xl"
+                fontFamily={"New Century Schoolbook"}
               >
                 Profile
               </Heading>

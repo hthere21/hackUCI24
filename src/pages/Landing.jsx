@@ -19,7 +19,7 @@ function Landing() {
 
       {/* explore heading */}
       <Center marginTop={10} marginBottom={10}>
-        <Text as="b" fontSize={"2xl"}>
+        <Text as="b" fontSize={30} fontFamily={"New Century Schoolbook"}>
           Explore Sublets
         </Text>
       </Center>

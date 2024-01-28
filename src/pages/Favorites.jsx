@@ -11,7 +11,7 @@ function Favorites() {
       <Navbar />
 
       <Center marginTop={5} marginBottom={5}>
-        <Heading>Favorites</Heading>
+        <Heading fontFamily={"New Century Schoolbook"} fontSize={40}>Favorites</Heading>
       </Center>
 
       <ListingWithMap listings={apartmentData} />
