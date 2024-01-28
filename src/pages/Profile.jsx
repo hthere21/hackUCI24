@@ -58,6 +58,7 @@ function Profile() {
           <div>
             <p>User Information:</p>
             <p>Email: {user.email}</p>
+            {/* <img src="https://firebasestorage.googleapis.com/v0/b/hackuci2024.appspot.com/o/listings%2F944fe7dc31af348cab1b528ad1192dab.jpeg?alt=media&token=645bb6d8-324f-4770-87c3-59a46e3c08e7"></img> */}
             {userData && (
               <div>
                 <p>Additional Information:</p>

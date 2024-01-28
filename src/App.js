@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import AdditionalInfoForm from "./pages/AdditionalInfoForm";
 import { AuthProvider } from "./components/AuthContext";
 import ListingsTest from "./pages/ListingsTest";
+import CollectionListForm from "./pages/CollectionListForm";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/additional-info" element={<AdditionalInfoForm />} />
             <Route path="/listingsTest" element={<ListingsTest />} />
+            <Route path="/post" element={<CollectionListForm />} />
             {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
           </Routes>
         </Router>
