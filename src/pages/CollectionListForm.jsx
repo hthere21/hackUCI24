@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../config/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Navbar from "../components/Navbar";
+import { key } from "../config/melissa";
 
 import {
   Box,
@@ -11,6 +13,9 @@ import {
   FormLabel,
   Input,
   Select,
+  Heading,
+  Center,
+  Card,
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
@@ -28,9 +33,42 @@ const CollectionListForm = () => {
   const [state, setState] = useState("");
   const [type, setType] = useState("");
   const [zip, setZip] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const [image, setImage] = useState(null); // State to store the selected image file
+
+  function generateMelissaUrl() {
+    const url = new URL(
+      "https://address.melissadata.net/v3/WEB/GlobalAddress/doGlobalAddress"
+    );
+    url.search = new URLSearchParams({
+      t: "zotLeaseRequest",
+      id: key,
+      a1: address,
+      loc: city,
+      admarea: state,
+      postal: zip,
+      ctry: "USA",
+      format: "json",
+    });
+    return url;
+  }
+
+  const fetchData = async (requestURL) => {
+    try {
+      const response = await fetch(requestURL);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Data retrieve success", data);
+      return data; // Return the data for immediate use
+    } catch (error) {
+      setError(error);
+      return null; // Return null in case of an error
+    }
+  };
 
   const handleImageChange = (e) => {
     // Set the selected image file to the state
@@ -42,6 +80,11 @@ const CollectionListForm = () => {
     try {
       const defaultImageUrl =
         "https://www.irvinecompany.com/images/apartments-1-1080x720.webp";
+
+      const geoData = await fetchData(generateMelissaUrl());
+      let latitude = geoData.Records[0].Latitude;
+      let longitude = geoData.Records[0].Longitude;
+
       let newListing = {
         address,
         city,
@@ -54,7 +97,11 @@ const CollectionListForm = () => {
         state,
         type,
         zip,
+        latitude,
+        longitude,
       };
+
+      console.log(newListing);
 
       // Upload image to Firebase Storage
       if (image) {
@@ -167,11 +214,16 @@ const CollectionListForm = () => {
     "Wisconsin",
     "Wyoming",
   ];
-
+  // console.log(start);
   return (
     <>
-      <h1>Listing Form</h1>
-      <Box p={4}>
+      <Navbar />
+
+      <Center marginTop={10}>
+        <Heading>Listing Form</Heading>
+      </Center>
+
+      <Card p={10} marginTop={10}>
         <FormControl mt={4}>
           <FormLabel>Title</FormLabel>
           <Input
@@ -280,7 +332,7 @@ const CollectionListForm = () => {
         <Button mt={4} colorScheme="blue" onClick={handleClearAndGoBack}>
           Go Back
         </Button>
-      </Box>
+      </Card>
     </>
   );
 };

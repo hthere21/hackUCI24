@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import {
   Flex,
   Heading,
@@ -9,17 +8,8 @@ import {
   Container,
 } from "@chakra-ui/react";
 
-// import {
-//   useNavigate,
-// } from "react-router-dom";
-
-// import { FaUserAlt, FaLock } from "react-icons/fa";
 import { GoogleLoginButton } from "./GoogleLoginButton";
 import { EmailLoginForm } from "./EmailLoginForm";
-import { SignoutButton } from "../SignoutButton";
-
-// const CFaUserAlt = chakra(FaUserAlt);
-// const CFaLock = chakra(FaLock);
 
 function CardLogin() {
   return (
@@ -83,7 +73,6 @@ function CardLogin() {
             <Box>
               <GoogleLoginButton />
             </Box>
-            <SignoutButton />
           </Flex>
         </Center>
       </Box>

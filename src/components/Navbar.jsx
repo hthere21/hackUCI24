@@ -38,18 +38,19 @@ function Navbar() {
     <>
       <Box top="0" left="0" right="0" zIndex="999" bg="white" boxShadow="sm">
         <Flex p={4}>
+          
           {/* Logout Button */}
-          {user ? <SignoutButton /> : null}
+          {user ? (
+              <SignoutButton/>
+            ) : (
+              null
+          )}
 
           <Spacer />
-
+          
           {/* Logo and Brand Name */}
           <Center>
-            <Heading
-              size="lg"
-              fontWeight="bold"
-              onClick={() => navigate("/home")}
-            >
+            <Heading size="lg" fontWeight="bold">
               ZotLease
             </Heading>
           </Center>
@@ -95,10 +96,11 @@ function Navbar() {
                 borderLeftRadius={3.3}
                 borderRightRadius={3.3}
                 fontSize={20}
-                onClick={() => navigate("/likes")}
+                onClick={() => navigate("/favorites")}
               >
-                Likes
+                Favorites
               </Button>
+
               <Button
                 size="md"
                 marginRight={5}
@@ -122,6 +124,7 @@ function Navbar() {
               Login
             </Button>
           )}
+
         </Flex>
       </Box>
     </>

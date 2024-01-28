@@ -14,6 +14,8 @@ import { AuthProvider } from "./components/AuthContext";
 import ListingsTest from "./pages/ListingsTest";
 import CollectionListForm from "./pages/CollectionListForm";
 import ParentComponent from "./pages/ParentComponent";
+import MelissaTest from "./pages/MelissaTest";
+import Favorites from "./pages/Favorites";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
             <Route path="/additional-info" element={<AdditionalInfoForm />} />
             <Route path="/listingsTest" element={<ListingsTest />} />
             <Route path="/post" element={<CollectionListForm />} />
+            <Route path="/melissaTest" element={<MelissaTest />} />
+            <Route path="/favorites" element={<Favorites />} />
             {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
           </Routes>
         </Router>

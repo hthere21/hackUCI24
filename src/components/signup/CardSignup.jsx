@@ -9,19 +9,9 @@ import {
   Center,
 } from "@chakra-ui/react";
 
-// import { FaUserAlt, FaLock } from "react-icons/fa";
-// import { GoogleLoginButton } from "./GoogleLoginButton";
 import { EmailSignupForm } from "./EmailSignupForm";
-import { SignoutButton } from "../SignoutButton";
-
-// const CFaUserAlt = chakra(FaUserAlt);
-// const CFaLock = chakra(FaLock);
 
 const CardSignup = () => {
-  // const [showPassword, setShowPassword] = useState(false);
-
-  // const handleShowClick = () => setShowPassword(!showPassword);
-
   return (
     <Container maxW={"-moz-max-content"} p={0}>
       <Box
@@ -78,7 +68,6 @@ const CardSignup = () => {
               <Box minW={{ base: "90%", md: "468px" }}>
                 <EmailSignupForm />
               </Box>
-              <SignoutButton />
             </Stack>
           </Flex>
         </Center>

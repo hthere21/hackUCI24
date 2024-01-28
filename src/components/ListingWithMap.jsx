@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import apartmentData from "../fakeApartmentData";
+import { Map, GoogleApiWrapper } from "google-maps-react";
+
 import {
   Grid,
   GridItem,
@@ -16,15 +18,13 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+
 function ListingWithMap() {
-  const [selectedElement, setElement] = useState({});
+  const [selectedElement, setElement] = useState(null);
   const showClickedCard = (id) => {
     apartmentData.filter((element) => {
       if (element.id === id) {
         setElement(element);
-      }
-      else {
-        setElement(null);
       }
     });
   };
@@ -81,39 +81,40 @@ function ListingWithMap() {
 
       {/* Detailed Property */}
       {selectedElement ? (
-              <GridItem w="100%" h="10">
-              <Image
-                objectFit="cover"
-                src={selectedElement.imageUrl}
-                alt="Apartment"
-                width="100%"
-                height="425px"
-              />
-              <Heading marginTop={3} marginLeft={3} fontSize="6xl"> 
-                {selectedElement.name}
-              </Heading>
-      
-              <Text marginLeft={3} marginBottom={3} fontSize="2xl"> 
-                {selectedElement.address}
-              </Text>
-      
-              <Card> 
-                <Heading marginLeft={3}> 
-                  About the Place
-                </Heading>
-      
-                <CardBody> 
-                  <Text> Price: {selectedElement.price}</Text>
-                  <Text> Floor Plan: {selectedElement.floor_plan}</Text>
-                  <Text> Description: </Text>
-                  <Text> Remember to change this to the description.</Text>
-                </CardBody>
-              </Card>
-      
-            </GridItem>
-            ) : (
-              null
-          )}
+        <GridItem w="100%" h="10">
+          <Image
+            objectFit="cover"
+            src={selectedElement.imageUrl}
+            alt="Apartment"
+            width="100%"
+            height="425px"
+          />
+          <Heading marginTop={3} marginLeft={3} fontSize="6xl">
+            {selectedElement.name}
+          </Heading>
+
+          <Text marginLeft={3} marginBottom={3} fontSize="2xl">
+            {selectedElement.address}
+          </Text>
+
+          <Card>
+            <Heading marginLeft={3}>About the Place</Heading>
+
+            <CardBody>
+              <Text> Price: {selectedElement.price}</Text>
+              <Text> Floor Plan: {selectedElement.floor_plan}</Text>
+              <Text> Description: </Text>
+              <Text> Remember to change this to the description.</Text>
+            </CardBody>
+          </Card>
+        </GridItem>
+      ) : (
+        <GridItem w="100%" h="10">
+          <Center alignItems="center" justifyContent="center">
+            <Heading> Select a Listing For More Detail </Heading>
+          </Center>
+        </GridItem>
+      )}
     </Grid>
 
     // {showClickedCard}
