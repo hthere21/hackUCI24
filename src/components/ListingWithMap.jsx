@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import HeartButton from './HeartButton'
+import ReactDOM from "react-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import HeartButton from "./HeartButton";
 
 import React from "react";
 import { useState } from "react";
@@ -19,23 +19,20 @@ import {
   Center,
   CardFooter,
   Button,
-  AspectRatio
+  AspectRatio,
 } from "@chakra-ui/react";
 
-
-function ListingWithMap() {
+function ListingWithMap({ listings }) {
   const [selectedElement, setElement] = useState(null);
 
-  const baseMapUrl = 'https://www.google.com/maps/';
-  
+  const baseMapUrl = "https://www.google.com/maps/";
+
   const showClickedCard = (id) => {
-    apartmentData.filter((element) => {
+    listings.filter((element) => {
       if (element.id === id) {
         setElement(element);
       }
     });
-  
-  
   };
 
   // console.log(selectedElement);
@@ -43,7 +40,7 @@ function ListingWithMap() {
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
       {/* All the card listings */}
       <GridItem w="100%" h="10">
-        {apartmentData.map((element) => (
+        {listings.map((element) => (
           <Card
             key={element.id}
             direction={{ base: "column", sm: "row" }}
@@ -70,7 +67,7 @@ function ListingWithMap() {
                   {element.price}
                 </Text>
                 <Text fontSize={"lg"} marginBottom={1}>
-                  {element.floor_plan}
+                  {element.type}
                 </Text>
                 <Text fontSize={"lg"}>
                   Pet friendly, Non-smoking, Clean, Fitness Building
@@ -83,8 +80,8 @@ function ListingWithMap() {
                     Contact Lister
                   </Button>
 
-                  <Button marginLeft={3}> 
-                    <HeartButton/>
+                  <Button marginLeft={3}>
+                    <HeartButton />
                   </Button>
                 </CardFooter>
               </Center>
@@ -105,9 +102,9 @@ function ListingWithMap() {
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
-            <Button marginLeft={5}> 
-              <HeartButton/>
-             </Button>
+            <Button marginLeft={5}>
+              <HeartButton />
+            </Button>
           </Heading>
 
           <Text marginLeft={3} marginBottom={3} fontSize="2xl">
@@ -126,7 +123,7 @@ function ListingWithMap() {
           </Card>
 
           <AspectRatio ratio={16 / 9}>
-            <iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6642.805457267031!2d-117.84769245296229!3d33.64672532470028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcde0e2592bf91%3A0x79fbc5d0b6dab7ec!2sUniversity%20of%20California%2C%20Irvine!5e0!3m2!1sen!2sus!4v1706416273132!5m2!1sen!2sus'></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6642.805457267031!2d-117.84769245296229!3d33.64672532470028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcde0e2592bf91%3A0x79fbc5d0b6dab7ec!2sUniversity%20of%20California%2C%20Irvine!5e0!3m2!1sen!2sus!4v1706416273132!5m2!1sen!2sus"></iframe>
           </AspectRatio>
         </GridItem>
       ) : (
