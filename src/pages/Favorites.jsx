@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import ListingWithMap from "../components/ListingWithMap";
+import apartmentData from "../fakeApartmentData";
 
 import { 
     Box, 
@@ -22,7 +23,7 @@ function Favorites() {
                 </Heading>
             </Center>
 
-            <ListingWithMap/>
+            <ListingWithMap listings={apartmentData}/>
         </>
     );
 }

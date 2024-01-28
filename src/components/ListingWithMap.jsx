@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import HeartButton from "./HeartButton";
@@ -6,7 +6,6 @@ import HeartButton from "./HeartButton";
 import React from "react";
 import { useState } from "react";
 import apartmentData from "../fakeApartmentData";
-import GoogleMapReact from "google-map-react";
 
 import {
   Grid,
