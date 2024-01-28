@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingCard from "./login/LoadingCard";
 import {
   db,
   auth,
@@ -20,7 +21,6 @@ import {
   Heading,
   Button,
   Center,
-  Spinner,
   ModalOverlay,
   useDisclosure,
   Modal,
@@ -164,15 +164,7 @@ const CardUser = () => {
   };
 
   if (loading) {
-    return (
-      <Center>
-      
-        <Card>
-          <Text>Loading...</Text>
-          <Spinner />
-        </Card>
-      </Center>
-    );
+    return <LoadingCard />;
   }
 
   return (
