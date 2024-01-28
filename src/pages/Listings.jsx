@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-// import { Container, Box, Center, Text, Stack } from "@chakra-ui/react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import FilterBar from "../components/FilterBar";
 import ListingWithMap from "../components/ListingWithMap";
@@ -9,6 +8,9 @@ import { db, getDocs, collection, query } from "../config/firebase";
 
 function Listings() {
   const [listings, setListings] = useState([]);
+  const [searchParams] = useSearchParams();
+  const city = searchParams.get("city");
+  console.log("City", city);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +29,7 @@ function Listings() {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log(items);
+      // console.log(items);
       return items;
     } catch (err) {
       console.error(err);

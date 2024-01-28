@@ -13,10 +13,9 @@ function Favorites() {
       <Center marginTop={5} marginBottom={5}>
         <Heading>Favorites</Heading>
       </Center>
-
-            <ListingWithMap listings={apartmentData}/>
-        </>
-    );
+      <ListingWithMap listings={apartmentData} />
+    </>
+  );
 }
 
 export default Favorites;

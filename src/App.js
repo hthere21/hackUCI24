@@ -24,7 +24,7 @@ function App() {
             <Route path="/home" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/chat" element={<ParentComponent />} />
-            <Route path="/search/:city?/:zip?" element={<Listings />} />
+            <Route path="/search/" element={<Listings />} />
             <Route path="/allListings" element={<Listings />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<Profile />} />

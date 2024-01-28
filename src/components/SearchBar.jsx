@@ -1,10 +1,15 @@
-// import React, { ReactElement, ReactNode } from "react";
-import React from "react";
-import { Button, Input, InputGroup, InputRightAddon, NumberInput, NumberInputField } from "@chakra-ui/react";
-// import { Search2Icon } from "@chakra-ui/icons";
-
+import React, { useState } from "react";
+import { Button, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
+  const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate(`/search/?city=${encodeURIComponent(inputValue)}`);
+  };
+
   return (
     <>
       <InputGroup borderRadius={5} size="lg">
@@ -13,8 +18,9 @@ export const SearchBar = () => {
           placeholder="Zip code: e.g 92614"
           border="1px solid #FFFFFF"
           color={"#9eadc1"}
+          onChange={(e) => setInputValue(e.target.value)}
         />
-        
+
         {/* <NumberInput width="100%">
             <NumberInputField  placeholder="Zip code: e.g 92614" border="1px solid #FFFFFF"
           color={"#9eadc1"}/>
@@ -27,6 +33,7 @@ export const SearchBar = () => {
             borderLeftRadius={0}
             borderRightRadius={3.3}
             fontSize={20}
+            onClick={handleSearch}
           >
             Search
           </Button>
