@@ -77,7 +77,7 @@ function ListingWithMap() {
       </GridItem>
 
       {/* Detailed Property */}
-      {selectedElement ? (
+      {selectedElement == null ? (
               <GridItem w="100%" h="10">
               <Image
                 objectFit="cover"
