@@ -7,7 +7,6 @@ import Navbar from "../components/Navbar";
 import { key } from "../config/melissa";
 
 import {
-  Box,
   Button,
   FormControl,
   FormLabel,
@@ -16,6 +15,8 @@ import {
   Heading,
   Center,
   Card,
+  NumberInput,
+  NumberInputField
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
@@ -276,11 +277,15 @@ const CollectionListForm = () => {
 
         <FormControl mt={4}>
           <FormLabel>Price</FormLabel>
-          <Input
+          {/* <Input
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-          />
+          /> */}
+          <NumberInput>
+            <NumberInputField value={price} onChange={(e) => setPrice(e.target.value)}/>
+          </NumberInput>
+
         </FormControl>
 
         <FormControl mt={4}>

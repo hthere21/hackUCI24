@@ -1,7 +1,15 @@
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import HeartButton from './HeartButton'
+
 import React from "react";
 import { useState } from "react";
 import apartmentData from "../fakeApartmentData";
-import { Map, GoogleApiWrapper } from "google-maps-react";
+
+// const heart = <FontAwesomeIcon icon={faHeart} />
+
+// ReactDOM.render(heart, document.body)
 
 import {
   Grid,
@@ -12,22 +20,25 @@ import {
   CardBody,
   Heading,
   Text,
-  Textarea,
   Center,
   CardFooter,
-  Button,
+  Button
 } from "@chakra-ui/react";
 
 
 function ListingWithMap() {
   const [selectedElement, setElement] = useState(null);
+  
   const showClickedCard = (id) => {
     apartmentData.filter((element) => {
       if (element.id === id) {
         setElement(element);
       }
     });
+  
+  
   };
+
   // console.log(selectedElement);
   return (
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
@@ -72,6 +83,10 @@ function ListingWithMap() {
                   <Button variant="solid" colorScheme="teal">
                     Contact Lister
                   </Button>
+
+                  <Button marginLeft={3}> 
+                    <HeartButton/>
+                  </Button>
                 </CardFooter>
               </Center>
             </Stack>
@@ -91,6 +106,9 @@ function ListingWithMap() {
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
+            <Button marginLeft={5}> 
+              <HeartButton/>
+             </Button>
           </Heading>
 
           <Text marginLeft={3} marginBottom={3} fontSize="2xl">

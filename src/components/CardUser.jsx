@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "./AuthContext";
-// import { doc, getDoc } from "firebase/firestore";
-import { db, auth, doc, getDoc, onAuthStateChanged } from "../config/firebase";
-
+import { useNavigate } from "react-router-dom";
+import {
+  db,
+  auth,
+  doc,
+  getDoc,
+  setDoc,
+  onAuthStateChanged,
+} from "../config/firebase";
 import {
   Card,
   CardBody,
+  Select,
   Container,
   Box,
   Stack,
@@ -27,17 +33,22 @@ import {
   Avatar,
   Input,
   Textarea,
-  Flex
+  Flex,
 } from "@chakra-ui/react";
 
 const CardUser = () => {
-  // const { user, updateUser } = useAuth();
-
   const [currentUser, setCurrentUser] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  // const finalRef = React.useRef(null);
   const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState(""); // Changed from text to select
+  const [university, setUniversity] = useState("");
+  const [bio, setBio] = useState("");
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const OverlayOne = () => (
     <ModalOverlay
@@ -48,6 +59,33 @@ const CardUser = () => {
 
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
 
+  const handleSubmit = async () => {
+    try {
+      // Create a Firestore document for the user
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      setEmail(auth.currentUser.email);
+      await setDoc(userRef, {
+        name,
+        age,
+        gender,
+        university,
+        bio,
+        email,
+      });
+
+      // Redirect to the home page after submitting the form
+      navigate("/profile");
+    } catch (error) {
+      console.error("Error updating user information:", error);
+      // Handle error
+    }
+  };
+
+  const handleSaveChanges = () => {
+    handleSubmit();
+    onClose();
+  };
+
   useEffect(() => {
     let isSubscribed = true; // To prevent state update if component unmounts
 
@@ -56,7 +94,39 @@ const CardUser = () => {
       if (user && isSubscribed) {
         // User is signed in, fetch user data
         fetchUserData(user).then((userData) => {
+          setEmail(auth.currentUser.email);
+
           setCurrentUser(userData);
+          try {
+            setName(userData.name);
+          } catch (err) {
+            console.error(err);
+          }
+
+          try {
+            setAge(userData.age);
+          } catch (err) {
+            console.error(err);
+          }
+
+          try {
+            setGender(userData.gender);
+          } catch (err) {
+            console.error(err);
+          }
+
+          try {
+            setUniversity(userData.university);
+          } catch (err) {
+            console.error(err);
+          }
+
+          try {
+            setBio(userData.bio);
+          } catch (err) {
+            console.error(err);
+          }
+
           setLoading(false);
         });
       } else {
@@ -77,7 +147,6 @@ const CardUser = () => {
   const fetchUserData = async (user) => {
     try {
       // Create a reference to the user's document in the 'users' collection
-
       const userDocRef = doc(db, "users", user.uid);
 
       // Fetch the document data from Firestore
@@ -102,7 +171,7 @@ const CardUser = () => {
       <Container maxW={"-moz-max-content"} p={0}>
         <Box
           position="relative"
-          bgImage="url('https://images.squarespace-cdn.com/content/v1/5b60d4fa70e802968763e7f5/1576788003994-PYV0Z6XT8J0L3BJUXTQF/ME_towers_082919_0036_sz-2.jpg')"
+          bgImage="url('https://png.pngtree.com/thumb_back/fh260/background/20230421/pngtree-apartment-building-interior-decoration-image_2333111.jpg')"
           bgSize="cover"
           bgPosition="center"
           bgRepeat="no-repeat"
@@ -129,7 +198,13 @@ const CardUser = () => {
             justifyContent="center"
             minH={80}
           >
-            <Flex>
+            <Flex
+              flexDirection="column"
+              width="100wh"
+              height="100vh"
+              justifyContent="center"
+              alignItems="center"
+            >
               {/* <Center marginTop={10}> */}
               <Heading
                 color="white"
@@ -140,34 +215,31 @@ const CardUser = () => {
               >
                 Profile
               </Heading>
-              {/* </Center> */}
-
-              {/* <Center> */}
               <Card
                 maxW="lg"
-                marginTop={10}
-                padding={"5rem"}
+                marginTop={7}
+                padding={"4rem"}
                 alignItems="center"
                 borderRadius={15}
               >
-                <Avatar size={"lg"} />
+                <Avatar size={"xl"} />
                 <CardBody>
                   <Stack spacing="3" alignItems="center">
-                    <Heading size="lg">
-                      {currentUser.name ? currentUser.name : "No Name"}
-                    </Heading>
-                    <Text align="center">
-                      sex: {currentUser.gender ? currentUser.gender : "N/A"} |
-                      age: {currentUser.age ? currentUser.age : "N/A"}
+                    <Heading size="lg">{name ? name : "No Name"}</Heading>
+                    <Text align="center" fontSize={"xl"}>
+                      <Text as="b">Sex: </Text>
+                      {gender ? gender : "N/A"} | <Text as="b">Age: </Text>
+                      {age ? age : "N/A"}
                       <br />
-                      email: {currentUser.email ? currentUser.email : "N/A"}
+                      <Text as="b">Email: </Text>
+                      {email ? email : "N/A"}
                       <br />
-                      School:{" "}
-                      {currentUser.university ? currentUser.university : "N/A"}
+                      <Text as="b">School: </Text>
+                      {university ? university : "N/A"}
                       <br />
-                      Bio:
+                      <Text as="b">Bio:</Text>
                       <br />
-                      {currentUser.bio ? currentUser.bio : "N/A"}
+                      {bio ? bio : "N/A"}
                     </Text>
                     <Button
                       onClick={() => {
@@ -190,31 +262,58 @@ const CardUser = () => {
                         <ModalBody>
                           <FormControl>
                             <FormLabel>Name</FormLabel>
-                            <Input ref={initialRef} placeholder="Kayla Son" />
+                            <Input
+                              ref={initialRef}
+                              placeholder="Kayla Son"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                            />
                           </FormControl>
 
                           <FormControl mt={4}>
                             <FormLabel>Gender</FormLabel>
-                            <Input placeholder="Female" />
+                            <Select
+                              placeholder="Select option"
+                              value={gender}
+                              onChange={(e) => setGender(e.target.value)}
+                            >
+                              <option>Female</option>
+                              <option>Male</option>
+                            </Select>
                           </FormControl>
 
                           <FormControl mt={4}>
                             <FormLabel>Age</FormLabel>
-                            <Input placeholder="20" />
+                            <Input
+                              placeholder="20"
+                              value={age}
+                              onChange={(e) => setAge(e.target.value)}
+                            />
                           </FormControl>
 
                           <FormControl mt={4}>
                             <FormLabel>School</FormLabel>
-                            <Input placeholder="UC Irvine" />
+                            <Input
+                              placeholder="UC Irvine"
+                              value={university}
+                              onChange={(e) => setUniversity(e.target.value)}
+                            />
                           </FormControl>
 
                           <FormControl mt={4}>
                             <FormLabel>Bio</FormLabel>
-                            <Textarea placeholder="Enter a description about yourself." />
+                            <Textarea
+                              placeholder="Enter a description about yourself."
+                              value={bio}
+                              onChange={(e) => setBio(e.target.value)}
+                            />
                           </FormControl>
                         </ModalBody>
                         <ModalFooter>
-                          <Button colorScheme="blue" onClick={onClose}>
+                          <Button
+                            colorScheme="blue"
+                            onClick={handleSaveChanges}
+                          >
                             Save Changes
                           </Button>
                         </ModalFooter>

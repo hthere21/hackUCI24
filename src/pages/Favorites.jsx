@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import ListingWithMap from "../components/ListingWithMap";
 
 import { 
     Box, 
@@ -15,11 +16,13 @@ function Favorites() {
         <>
             <Navbar />
 
-            <Center>
+            <Center marginTop={5} marginBottom={5}>
                 <Heading>
                     Favorites
                 </Heading>
             </Center>
+
+            <ListingWithMap/>
         </>
     );
 }

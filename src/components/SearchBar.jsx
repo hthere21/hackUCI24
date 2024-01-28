@@ -9,7 +9,7 @@ export const SearchBar = () => {
       <InputGroup borderRadius={5} size="lg">
         <Input
           type="text"
-          placeholder="Irvine, CA..."
+          placeholder="Zip code: e.g 92614"
           border="1px solid #FFFFFF"
           color={"#9eadc1"}
           //   color={"white"}
