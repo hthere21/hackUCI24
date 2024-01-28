@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  Timestamp,
+} from "firebase/firestore";
 import { db, auth } from "../config/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Navbar from "../components/Navbar";
@@ -98,16 +103,16 @@ const CollectionListForm = () => {
         address,
         city: formattedCity,
         description,
-        end,
+        end: Timestamp.fromDate(new Date(end)),
         imageUrl: defaultImageUrl, // Default image URL
         name,
-        price,
-        start,
+        price: Number(price),
+        start: Timestamp.fromDate(new Date(start)),
         state: formattedState,
         type,
         zip,
-        latitude,
-        longitude,
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
       };
 
       console.log(newListing);
@@ -343,11 +348,6 @@ const CollectionListForm = () => {
 
                     <FormControl mt={4}>
                       <FormLabel>Price</FormLabel>
-                      {/* <Input
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          /> */}
                       <NumberInput>
                         <NumberInputField
                           value={price}
@@ -358,12 +358,15 @@ const CollectionListForm = () => {
 
                     <FormControl mt={4}>
                       <FormLabel>Type</FormLabel>
-                      <Input
-                        type="text"
+
+                      <Select
+                        placeholder="Select Sublet Type"
                         value={type}
-                        placeholder="e.g.. 1 bedroom - 1 bathroom"
                         onChange={(e) => setType(e.target.value)}
-                      />
+                      >
+                        <option value={"Room"}>Room</option>
+                        <option value={"Apartment"}>Apartment</option>
+                      </Select>
                     </FormControl>
 
                     <FormControl mt={4}>
@@ -376,13 +379,12 @@ const CollectionListForm = () => {
                     </FormControl>
 
                     <FormControl mt={4}>
-                      <FormLabel>Start (Timestamp)</FormLabel>
+                      <FormLabel>Start Date</FormLabel>
                       <Input
                         type="date"
                         value={start}
                         onChange={(e) => setStart(e.target.value)}
                       />
-                      {/* You might want to use a date picker library for a better user experience */}
                     </FormControl>
 
                     <FormControl mt={4}>

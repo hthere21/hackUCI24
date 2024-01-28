@@ -39,7 +39,7 @@ function FilterBar({ searchParameters }) {
       setStart(parameters.start);
     }
     if (parameters.end) {
-      setStart(parameters.end);
+      setEnd(parameters.end);
     }
   }, [parameters]);
 
@@ -87,12 +87,14 @@ function FilterBar({ searchParameters }) {
               </FormControl>
               <FormControl>
                 <Select
-                  placeholder="Prices"
+                  placeholder="Max Price"
                   onChange={(e) => setPrice(e.target.value)}
                   value={price}
                 >
-                  <option>United Arab Emirates</option>
-                  <option>Nigeria</option>
+                  <option value={1000}>{"$1,000"}</option>
+                  <option value={2000}>{"$2,000"}</option>
+                  <option value={3000}>{"$3,000"}</option>
+                  <option value={10000}>{"$3,000+"}</option>
                 </Select>
               </FormControl>
 

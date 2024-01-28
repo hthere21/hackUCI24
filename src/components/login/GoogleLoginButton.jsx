@@ -37,6 +37,7 @@ export const GoogleLoginButton = () => {
             await setDoc(doc(db, "users", user.uid), {
               email: user.email,
               liked: [],
+              listings: [],
             });
             console.log("added user to DB");
           } catch (err) {
