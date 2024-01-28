@@ -7,6 +7,8 @@ import { Map, Marker } from "pigeon-maps";
 
 import {
   Grid,
+  SimpleGrid,
+  Box,
   GridItem,
   Card,
   Image,
@@ -36,9 +38,9 @@ function ListingWithMap({ listings }) {
 
   // console.log(selectedElement);
   return (
-    <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+    <SimpleGrid columns={2} spacing={2}>
       {/* All the card listings */}
-      <GridItem w="100%" h="10">
+      <Box w="100%" h="100vh">
         {listings.map((element) => (
           <Card
             key={element.id}
@@ -87,11 +89,17 @@ function ListingWithMap({ listings }) {
             </Stack>
           </Card>
         ))}
-      </GridItem>
+      </Box>
 
       {/* Detailed Property */}
       {selectedElement ? (
-        <GridItem w="100%" h="10" backgroundColor={"#EAEAEA"}>
+        <Box
+          width="100%"
+          height={"100vh"}
+          margin={0}
+          padding={0}
+          backgroundColor={"#EAEAEA"}
+        >
           <Image
             objectFit="cover"
             src={selectedElement.imageUrl}
@@ -139,26 +147,32 @@ function ListingWithMap({ listings }) {
               ]}
             />
           </Map>
-        </GridItem>
+        </Box>
       ) : (
-        <GridItem w="100%" h="10" backgroundColor={"#EAEAEA"}>
-          {/* <Center> */}
-          <Flex
-            backgroundColor={"#EAEAEA"}
-            backgroundPosition={"cover"}
-            alignContent={"center"}
-            flexDirection={"column"}
-            height="100%"
-          >
-            <Heading fontSize={"4xl"}>
+        <Box
+          width="100%"
+          height={"100vh"}
+          margin={0}
+          padding={0}
+          backgroundColor={"#EAEAEA"}
+        >
+          <Center>
+            <Image
+              objectFit="cover"
+              maxW={{ base: "100%", sm: "250px" }}
+              marginTop={"30vh"}
+              src="https://cdn-icons-png.flaticon.com/512/2879/2879307.png"
+            />
+          </Center>
+          <Center>
+            <Text fontSize={"4xl"} fontFamily={"Georgia"} marginTop={10}>
               {" "}
               Select a Listing For More Detail{" "}
-            </Heading>
-          </Flex>
-          {/* </Center> */}
-        </GridItem>
+            </Text>
+          </Center>
+        </Box>
       )}
-    </Grid>
+    </SimpleGrid>
 
     // {showClickedCard}
   );
