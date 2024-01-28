@@ -92,9 +92,9 @@ function ListingWithMap({ listings }) {
                       color={isLiked ? "red" : "black"}
                     />
                   </Button> */}
-                  {/* <Button> */}
+                  <Button>
                     <HeartButton id={element.id}/>
-                  {/* </Button> */}
+                  </Button>
                 </CardFooter>
               </Center>
             </Stack>
@@ -121,7 +121,7 @@ function ListingWithMap({ listings }) {
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
-            <Button marginLeft={5}>{/* <HeartButton /> */}</Button>
+            <Button marginLeft={5}><HeartButton /></Button>
           </Heading>
 
           <Text marginLeft={3} marginBottom={3} fontSize="2xl">
