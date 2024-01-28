@@ -7,6 +7,7 @@ import UserProfile from "../components/UserProfile";
 import CardUser from "../components/CardUser";
 
 function Profile() {
+
   return (
     <>
       <Navbar />
