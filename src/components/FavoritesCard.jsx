@@ -146,7 +146,9 @@ function FavoritesCard({ listings, showDeleteButton, setUserListings }) {
 
       // Update the Firestore document with the new liked array
       await updateDoc(userDocRef, { liked: updatedLikedArray });
+
       console.log("Update successful.");
+      window.location.reload();
     } catch (error) {
       console.error("Error removing listing:", error);
     }
@@ -169,7 +171,6 @@ function FavoritesCard({ listings, showDeleteButton, setUserListings }) {
   useEffect(() => {
     console.log("Filtered Apartments:", filteredApartments); // Log here
   }, [filteredApartments]);
-
 
   return (
     <SimpleGrid columns={2} spacing={2}>

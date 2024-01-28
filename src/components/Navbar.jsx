@@ -7,8 +7,10 @@ import {
   Heading,
   Spacer,
   Center,
+  Image,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import logo from "./images/logo.png";
 import { auth } from "../config/firebase";
 import { useAuth } from "./AuthContext";
 import { SignoutButton } from "../components/SignoutButton";
@@ -52,18 +54,21 @@ function Navbar() {
           <Spacer />
 
           {/* Logo and Brand Name */}
-          <Center>
-            <Link textDecoration={"none"}>
-              <Heading
-                fontFamily={"Brush Script MT"}
-                size="2xl"
-                fontWeight="bold"
-                onClick={() => navigate("/allListings/:selectedListing")}
-              >
-                ZotLease
-              </Heading>
-            </Link>
-          </Center>
+          <Flex flexDirection={"row"}>
+            <Center>
+              <Image src={logo} width={20}></Image>
+              <Link textDecoration={"none"}>
+                <Heading
+                  fontFamily={"Brush Script MT"}
+                  size="2xl"
+                  fontWeight="bold"
+                  onClick={() => navigate("/allListings/:selectedListing")}
+                >
+                  ZotLease
+                </Heading>
+              </Link>
+            </Center>
+          </Flex>
           <Spacer />
 
           {/* Menu Bar / Login */}
