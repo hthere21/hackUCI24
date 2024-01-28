@@ -15,7 +15,7 @@ export const SearchBar = () => {
       <InputGroup borderRadius={5} size="lg">
         <Input
           type="text"
-          placeholder="Zip code: e.g 92614"
+          placeholder="Search for sublets in your city"
           border="1px solid #FFFFFF"
           color={"#9eadc1"}
           onChange={(e) => setInputValue(e.target.value)}

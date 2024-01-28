@@ -56,18 +56,18 @@ export const EmailSignupForm = () => {
       });
 
       // add user to db
-      try { 
+      try {
         await setDoc(doc(db, "users", user.uid), {
           email: user.email,
+          liked: [],
         });
         console.log("added user to DB");
       } catch (err) {
-        console.log("Add user to db error: ")
+        console.log("Add user to db error: ");
         console.error(err);
       }
-      
-      navigate("/home");
 
+      navigate("/home");
     } catch (err) {
       console.error(err);
 
