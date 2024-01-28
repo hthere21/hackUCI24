@@ -1,11 +1,9 @@
-import ReactDOM from "react-dom"; 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import HeartButton from "./HeartButton";
 
 import React from "react";
 import { useState } from "react";
 import apartmentData from "../fakeApartmentData";
+import { Map, Marker } from "pigeon-maps";
 
 import {
   Grid,
@@ -93,7 +91,7 @@ function ListingWithMap({ listings }) {
 
       {/* Detailed Property */}
       {selectedElement ? (
-        <GridItem w="100%" h="10">
+        <GridItem w="100%" h="10" backgroundColor={"#EAEAEA"}> 
           <Image
             objectFit="cover"
             src={selectedElement.imageUrl}
@@ -120,15 +118,15 @@ function ListingWithMap({ listings }) {
               <Text> Floor Plan: {selectedElement.floor_plan}</Text>
               <Text> Description: </Text>
               <Text> Remember to change this to the description.</Text>
+              <Text> Longitude: {selectedElement.longitude} </Text>
+              <Text> Latitude: {selectedElement.latitude} </Text>
+              
             </CardBody>
           </Card>
 
-          <AspectRatio ratio={16 / 9}>
-            <iframe
-              title="map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6642.805457267031!2d-117.84769245296229!3d33.64672532470028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcde0e2592bf91%3A0x79fbc5d0b6dab7ec!2sUniversity%20of%20California%2C%20Irvine!5e0!3m2!1sen!2sus!4v1706416273132!5m2!1sen!2sus"
-            ></iframe>
-          </AspectRatio>
+          <Map height={500} defaultCenter={[selectedElement.longitude, selectedElement.latitude]} defaultZoom={11}>
+            <Marker width={50} anchor={[selectedElement.longitude, selectedElement.latitude]} />
+          </Map>
         </GridItem>
       ) : (
         <GridItem w="100%" h="10" backgroundColor={"#EAEAEA"}>

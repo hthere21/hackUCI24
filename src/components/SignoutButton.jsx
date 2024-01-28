@@ -32,8 +32,7 @@ export const SignoutButton = () => {
       <Button
         size="md"
         marginLeft={5}
-        borderLeftRadius={3.3}
-        borderRightRadius={3.3}
+        borderRadius={10}
         fontSize={20}
         onClick={handleSignOut}
       >

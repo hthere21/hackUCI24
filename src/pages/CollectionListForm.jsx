@@ -10,6 +10,9 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Container,
+  Flex,
+  Stack,
   Input,
   Select,
   Heading,
@@ -220,152 +223,198 @@ const CollectionListForm = () => {
   return (
     <>
       <Navbar />
-      {/* backgroundColor={"#9eadc1"} */}
-      <Box
-        paddingTop={10}
-        backgroundImage={
-          "https://i.pngimg.me/thumb/f/720/comrawpixel2757353.jpg"
-        }
-        backgroundRepeat={"no-repeat"}
-        bgSize={"cover"}
-      >
-        <Center>
-          <Heading
-            color="black"
-            // textShadow={"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}
+      <Container maxW={"-moz-max-content"} p={0}>
+        <Box
+          position="relative"
+          bgImage="url('https://images.squarespace-cdn.com/content/v1/5b60d4fa70e802968763e7f5/1576788003994-PYV0Z6XT8J0L3BJUXTQF/ME_towers_082919_0036_sz-2.jpg')"
+          bgSize="cover"
+          bgPosition="center"
+          bgRepeat="no-repeat"
+          left={0}
+          right={0}
+          width="100vw"
+          maxWidth="100%"
+        >
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            w="full"
+            h="full"
+            bg="black"
+            opacity={0.5}
+            bgBlendMode="multiply"
+          />
+          <Center
+            position="relative"
+            zIndex={1}
+            textAlign="center"
+            display="flex"
+            justifyContent="center"
+            minH={80}
           >
-            Listing Form
-          </Heading>
-        </Center>
-        <Center>
-          <Card p={10} marginTop={10} maxW={"3xl"}>
-            <FormControl mt={4}>
-              <FormLabel>Title</FormLabel>
-              <Input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </FormControl>
+            <Stack>
+              {" "}
+              <Box
+                paddingTop={10}
+                backgroundImage={
+                  "https://resource.rentcafe.com/image/upload/x_0,y_0,w_2260,h_2000,c_crop/q_auto,f_auto,c_fill,w_576,ar_0.939,g_auto/s3/2/55533/jefferson%20innova%20-%20exterior%20corner%20twilight(2).jpg"
+                }
+                backgroundRepeat={"no-repeat"}
+                bgSize={"cover"}
+              >
+                <Center>
+                  <Heading
+                    color="white"
+                    // textShadow={"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}
+                    textShadow={"2px 2px 5px black"}
+                  >
+                    Listing Form
+                  </Heading>
+                </Center>
+                <Center>
+                  <Card
+                    p={10}
+                    marginTop={10}
+                    maxW={"3xl"}
+                    borderRadius={15}
+                    boxShadow={"5px 10px 18px gray"}
+                  >
+                    <FormControl mt={4}>
+                      <FormLabel>Title</FormLabel>
+                      <Input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </FormControl>
 
-            <FormControl>
-              <FormLabel>Address</FormLabel>
-              <Input
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </FormControl>
+                    <FormControl>
+                      <FormLabel>Address</FormLabel>
+                      <Input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                      />
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>City</FormLabel>
-              <Input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>City</FormLabel>
+                      <Input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                      />
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Zip</FormLabel>
-              <Input
-                type="text"
-                value={zip}
-                onChange={(e) => setZip(e.target.value)}
-              />
-            </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>Zip</FormLabel>
+                      <Input
+                        type="text"
+                        value={zip}
+                        onChange={(e) => setZip(e.target.value)}
+                      />
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>State</FormLabel>
-              <Select value={state} onChange={(e) => setState(e.target.value)}>
-                <option value="" disabled>
-                  Select a state
-                </option>
-                {usStates.map((usState) => (
-                  <option key={usState} value={usState}>
-                    {usState}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>State</FormLabel>
+                      <Select
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                      >
+                        <option value="" disabled>
+                          Select a state
+                        </option>
+                        {usStates.map((usState) => (
+                          <option key={usState} value={usState}>
+                            {usState}
+                          </option>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Price</FormLabel>
-              {/* <Input
+                    <FormControl mt={4}>
+                      <FormLabel>Price</FormLabel>
+                      {/* <Input
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           /> */}
-              <NumberInput>
-                <NumberInputField
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </NumberInput>
-            </FormControl>
+                      <NumberInput>
+                        <NumberInputField
+                          value={price}
+                          onChange={(e) => setPrice(e.target.value)}
+                        />
+                      </NumberInput>
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Type</FormLabel>
-              <Input
-                type="text"
-                value={type}
-                placeholder="e.g.. 1 bedroom - 1 bathroom"
-                onChange={(e) => setType(e.target.value)}
-              />
-            </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>Type</FormLabel>
+                      <Input
+                        type="text"
+                        value={type}
+                        placeholder="e.g.. 1 bedroom - 1 bathroom"
+                        onChange={(e) => setType(e.target.value)}
+                      />
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Description</FormLabel>
-              <Input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>Description</FormLabel>
+                      <Input
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Start (Timestamp)</FormLabel>
-              <Input
-                type="date"
-                value={start}
-                onChange={(e) => setStart(e.target.value)}
-              />
-              {/* You might want to use a date picker library for a better user experience */}
-            </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>Start (Timestamp)</FormLabel>
+                      <Input
+                        type="date"
+                        value={start}
+                        onChange={(e) => setStart(e.target.value)}
+                      />
+                      {/* You might want to use a date picker library for a better user experience */}
+                    </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>End Date</FormLabel>
-              <Input
-                type="date"
-                value={end}
-                onChange={(e) => setEnd(e.target.value)}
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Image</FormLabel>
-              <Input type="file" onChange={handleImageChange} />
-            </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>End Date</FormLabel>
+                      <Input
+                        type="date"
+                        value={end}
+                        onChange={(e) => setEnd(e.target.value)}
+                      />
+                    </FormControl>
+                    <FormControl mt={4}>
+                      <FormLabel>Image</FormLabel>
+                      <Input type="file" onChange={handleImageChange} />
+                    </FormControl>
 
-            <Button
-              mt={4}
-              colorScheme="teal"
-              onClick={handleAddListing}
-              borderRadius={15}
-            >
-              Add Listing
-            </Button>
+                    <Button
+                      mt={4}
+                      colorScheme="teal"
+                      onClick={handleAddListing}
+                      borderRadius={15}
+                    >
+                      Add Listing
+                    </Button>
 
-            <Button
-              mt={4}
-              colorScheme="blue"
-              onClick={handleClearAndGoBack}
-              borderRadius={15}
-            >
-              Go Back
-            </Button>
-          </Card>
-        </Center>
-      </Box>
+                    <Button
+                      mt={4}
+                      colorScheme="blue"
+                      onClick={handleClearAndGoBack}
+                      borderRadius={15}
+                    >
+                      Go Back
+                    </Button>
+                  </Card>
+                </Center>
+              </Box>
+            </Stack>
+          </Center>
+        </Box>
+      </Container>
+      {/* backgroundColor={"#9eadc1"} */}
     </>
   );
 };
