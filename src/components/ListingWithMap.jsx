@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDisclosure } from "@chakra-ui/react";
 import HeartButton from "./HeartButton";
 import Mailto from "./Mailto";
 
@@ -17,10 +18,25 @@ import {
   CardFooter,
   Button,
   Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 
 function ListingWithMap({ listings }) {
   const [selectedElement, setElement] = useState(null);
+
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg="blackAlpha.300"
+    />
+  );
+  
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [overlay, setOverlay] = React.useState(<OverlayOne />);
 
   const showClickedCard = (id) => {
     listings.filter((element) => {
@@ -83,15 +99,38 @@ function ListingWithMap({ listings }) {
 
               <Center>
                 <CardFooter>
-                  <Button
-                    variant="solid"
-                    colorScheme="teal"
-                    onClick={() =>
-                      (window.location = "mailto:kaylason8263@gmail.com")
-                    }
+                <Button onClick={() => {
+                  setOverlay(<OverlayOne />) 
+                  onOpen()
+                  }} 
+                  variant="solid" 
+                  colorScheme="teal"
                   >
                     Contact Lister
                   </Button>
+
+                <Modal isOpen={isOpen} onClose={onClose}> 
+                  {overlay}
+                  <ModalContent>
+                    <ModalHeader>Lister Info</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody alignItems={"center"}>
+                      email: kaylason8263@gmail.com
+                    </ModalBody>
+
+                    <ModalFooter>
+                      <Button
+                      variant="solid"
+                      colorScheme="teal"
+                      onClick={() =>
+                        (window.location = "mailto:kaylason8263@gmail.com")
+                      }
+                      >
+                        Contact Now
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
                   {/* <Mailto label="Contact Lister" mailto="kaylason8263@gmail.com"/> */}
 
                   {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
