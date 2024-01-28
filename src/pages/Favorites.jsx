@@ -85,7 +85,7 @@ function Favorites() {
     }
   };
 
-  const handleRemoveListing = async (listingId) => {
+  const handleRemoveLiked = async (listingId) => {
     console.log("Remove Clicked - listingId:", listingId);
     console.log("userLikedArray before removal:", userLikedArray);
 
@@ -148,54 +148,18 @@ function Favorites() {
             listings={filteredApartments}
             // setUserListings={setUserListings}
             showDeleteButton={true}
-            renderListing={(listing) => (
-              <Flex key={listing.id} spacing={3}>
-                {/* Display listing information */}
-                <p>{listing.name}</p>
-                <p>{listing.address}</p>
-                {/* Add a button to delete the listing */}
-                <Button onClick={() => handleRemoveListing(listing.id)}>
-                  Remove Favorite
-                </Button>
-              </Flex>
-            )}
+            // renderListing={(listing) => (
+            //   <Flex key={listing.id} spacing={3}>
+            //     {/* Display listing information */}
+            //     <p>{listing.name}</p>
+            //     <p>{listing.address}</p>
+            //     {/* Add a button to delete the listing */}
+            //     <Button onClick={() => handleRemoveListing(listing.id)}>
+            //       Remove Favorite
+            //     </Button>
+            //   </Flex>
+            // )}
           />
-          {filteredApartments.map((listing) => (
-            <Box key={listing.id} borderWidth="1px" borderRadius="lg" p="4">
-              {/* Image */}
-              <Image
-                src={listing?.imageUrl || "default-image-url"} // Use the actual property name for the image URL
-                alt={listing?.name || "No Name"}
-                maxW="100%"
-                h="auto"
-              />
-
-              <Heading fontSize="xl">{listing?.name || "No Name"}</Heading>
-              <Text>{listing?.description || "No Description"}</Text>
-              <Text>Price: ${listing?.price || "N/A"}</Text>
-
-              {/* Additional fields */}
-              <Text>Address: {listing?.address || "N/A"}</Text>
-              <Text>City: {listing?.city || "N/A"}</Text>
-              <Text>Type: {listing?.type || "N/A"}</Text>
-              <Text>
-                Start Date:{" "}
-                {listing?.start?.toDate().toLocaleDateString() || "N/A"}
-              </Text>
-              <Text>
-                End Date: {listing?.end?.toDate().toLocaleDateString() || "N/A"}
-              </Text>
-
-              {/* "X" button to remove listing */}
-              <Button
-                onClick={() => handleRemoveListing(listing.id)}
-                mt={2}
-                colorScheme="red"
-              >
-                Remove
-              </Button>
-            </Box>
-          ))}
         </>
       )}
     </>
@@ -203,3 +167,41 @@ function Favorites() {
 }
 
 export default Favorites;
+
+// {/* where hai did stuff */}
+// {filteredApartments.map((listing) => (
+//   <Box key={listing.id} borderWidth="1px" borderRadius="lg" p="4">
+//     {/* Image */}
+//     <Image
+//       src={listing?.imageUrl || "default-image-url"} // Use the actual property name for the image URL
+//       alt={listing?.name || "No Name"}
+//       maxW="100%"
+//       h="auto"
+//     />
+
+//     <Heading fontSize="xl">{listing?.name || "No Name"}</Heading>
+//     <Text>{listing?.description || "No Description"}</Text>
+//     <Text>Price: ${listing?.price || "N/A"}</Text>
+
+//     {/* Additional fields */}
+//     <Text>Address: {listing?.address || "N/A"}</Text>
+//     <Text>City: {listing?.city || "N/A"}</Text>
+//     <Text>Type: {listing?.type || "N/A"}</Text>
+//     <Text>
+//       Start Date:{" "}
+//       {listing?.start?.toDate().toLocaleDateString() || "N/A"}
+//     </Text>
+//     <Text>
+//       End Date: {listing?.end?.toDate().toLocaleDateString() || "N/A"}
+//     </Text>
+
+//     {/* "X" button to remove listing */}
+//     <Button
+//       onClick={() => handleRemoveListing(listing.id)}
+//       mt={2}
+//       colorScheme="red"
+//     >
+//       Remove
+//     </Button>
+//   </Box>
+// ))}

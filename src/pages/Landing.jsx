@@ -81,7 +81,7 @@ function Landing() {
           borderLeftRadius={3.3}
           borderRightRadius={3.3}
           fontSize={20}
-          onClick={() => navigate("/allListings")}
+          onClick={() => navigate("/allListings/:selectedListing")}
         >
           See More
         </Button>

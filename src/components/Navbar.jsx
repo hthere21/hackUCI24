@@ -7,7 +7,6 @@ import {
   Heading,
   Spacer,
   Center,
-  textDecoration,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
@@ -59,13 +58,12 @@ function Navbar() {
                 fontFamily={"Brush Script MT"}
                 size="2xl"
                 fontWeight="bold"
-                onClick={() => navigate("/allListings")}
+                onClick={() => navigate("/allListings/:selectedListing")}
               >
                 ZotLease
               </Heading>
             </Link>
           </Center>
-
           <Spacer />
 
           {/* Menu Bar / Login */}

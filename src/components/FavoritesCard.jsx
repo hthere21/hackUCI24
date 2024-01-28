@@ -27,13 +27,19 @@ import {
 } from "@chakra-ui/react";
 import { getFirestore, doc, deleteDoc } from "firebase/firestore";
 
-function FavoritesCard({
-  listings,
-  showDeleteButton,
-  setUserListings,
-  selectedListingId = "0Myi1lJDPmuXwicvFUjP",
-}) {
-  console.log(selectedListingId);
+import {
+  getDoc,
+  query,
+  where,
+  collection,
+  getDocs,
+  setDoc,
+  updateDoc,
+  auth,
+} from "../config/firebase";
+import { useAuth } from "../components/AuthContext";
+
+function FavoritesCard({ listings, showDeleteButton, setUserListings }) {
   const [selectedElement, setElement] = useState(null);
 
   const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" />;
@@ -49,12 +55,6 @@ function FavoritesCard({
     });
   };
 
-  useEffect(() => {
-    if (selectedListingId) {
-      showClickedCard(selectedListingId);
-    }
-  }, [selectedListingId]);
-
   const [isLiked, setLiked] = useState(false);
 
   const handleLikeToggle = (id) => {
@@ -65,36 +65,112 @@ function FavoritesCard({
     });
   };
 
-  // Function to handle deleting a listing
-  // Function to handle deleting a listing
-  const handleDeleteListing = async (listingId) => {
-    try {
-      // Delete listing from Firestore
-      const db = getFirestore();
-      const listingDocRef = doc(db, "listings", listingId);
-      await deleteDoc(listingDocRef);
+  const { user } = useAuth();
+  const [userLikedArray, setUserLikedArray] = useState([]);
+  const [filteredApartments, setFilteredApartments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-      // Wait for the deletion to complete
-      // Then update the state to remove the deleted listing
-      setUserListings((prevListings) =>
-        prevListings.filter((listing) => listing.id !== listingId)
-      );
+  const fetchUserLikedArray = async () => {
+    if (user) {
+      try {
+        const db = getFirestore();
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
 
-      // Reset selectedElement state to null
-      setElement(null);
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+          const likedArray = userData.liked || [];
 
-      // Close the modal
-      onClose();
+          // Fetch the actual listing IDs from the listings collection
+          const listingsCollection = collection(db, "listings");
+          const listingsQuery = query(listingsCollection);
+          const listingsSnapshot = await getDocs(listingsQuery);
+          const listingIds = listingsSnapshot.docs.map((doc) => doc.id);
 
-      console.log("Favorite deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting favorite:", error);
+          // Filter out any invalid IDs from userLikedArray
+          const validLikedArray = likedArray.filter((id) =>
+            listingIds.includes(id)
+          );
+
+          setUserLikedArray(validLikedArray);
+        } else {
+          console.warn("User document does not exist.");
+        }
+      } catch (error) {
+        console.error("Error fetching user's liked items:", error);
+      }
     }
   };
 
-  // const showMap = (lat,long) =>
+  const fetchListingsDetails = async () => {
+    if (userLikedArray.length > 0) {
+      const db = getFirestore();
+      const listingsCollection = collection(db, "listings");
 
-  // console.log(selectedElement);
+      const queries = userLikedArray.map((id) => doc(listingsCollection, id));
+
+      try {
+        const listingsSnapshot = await Promise.all(queries.map(getDoc));
+
+        const listingsDetails = listingsSnapshot.map((doc) => {
+          const data = doc.data();
+          return { ...data, id: doc.id }; // Add the id property
+        });
+
+        setFilteredApartments(listingsDetails);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching listings details:", error);
+      }
+    }
+  };
+
+  const handleRemoveLiked = async (listingId) => {
+    console.log("Remove Clicked - listingId:", listingId);
+    console.log("userLikedArray before removal:", userLikedArray);
+
+    try {
+      // Remove the listing from userLikedArray
+      const updatedLikedArray = userLikedArray.filter((id) => id !== listingId);
+      console.log("updatedLikedArray:", updatedLikedArray);
+      setUserLikedArray(updatedLikedArray);
+
+      // Remove the listing from filteredApartments
+      setFilteredApartments((prevApartments) =>
+        prevApartments.filter((listing) => listing.id !== listingId)
+      );
+
+      // Save the updated liked array to Firestore using updateDoc
+      const db = getFirestore();
+      const userDocRef = doc(db, "users", user.uid);
+
+      // Update the Firestore document with the new liked array
+      await updateDoc(userDocRef, { liked: updatedLikedArray });
+      console.log("Update successful.");
+    } catch (error) {
+      console.error("Error removing listing:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserLikedArray();
+  }, [user]);
+
+  useEffect(() => {
+    if (userLikedArray.length > 0) {
+      fetchListingsDetails();
+    }
+  }, [userLikedArray]);
+
+  useEffect(() => {
+    console.log("User Liked Array:", userLikedArray); // Log here
+  }, [userLikedArray]);
+
+  useEffect(() => {
+    console.log("Filtered Apartments:", filteredApartments); // Log here
+  }, [filteredApartments]);
+
+
   return (
     <SimpleGrid columns={2} spacing={2}>
       {/* All the card listings */}
@@ -146,7 +222,7 @@ function FavoritesCard({
                   {showDeleteButton && (
                     <Button
                       marginRight={3}
-                      onClick={() => handleDeleteListing(element.id)}
+                      onClick={() => handleRemoveLiked(element.id)}
                       variant="solid"
                       colorScheme="red"
                     >
@@ -169,6 +245,7 @@ function FavoritesCard({
           margin={0}
           padding={0}
           backgroundColor={"#EAEAEA"}
+          borderRadius={15}
         >
           <Image
             objectFit="cover"
@@ -177,16 +254,18 @@ function FavoritesCard({
             width="100%"
             height="425px"
           />
-          <Heading marginTop={3} marginLeft={3} fontSize="6xl">
+          <Heading marginTop={3} marginLeft={3} fontSize="5xl">
             {selectedElement.name}
           </Heading>
 
-          <Text marginLeft={3} marginBottom={3} fontSize="2xl">
+          <Text marginLeft={3} marginBottom={3} fontSize="2xl" color={"gray"}>
             {selectedElement.address}
           </Text>
 
           <Card>
-            <Heading marginLeft={3}>About This Sublet</Heading>
+            <Text marginLeft={3} as={"b"} fontSize={30} marginTop={4}>
+              About This Sublet
+            </Text>
 
             <CardBody>
               <Text fontSize={"lg"} marginBottom={1}>

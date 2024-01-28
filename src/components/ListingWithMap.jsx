@@ -182,14 +182,6 @@ function ListingWithMap({
                       </ModalFooter>
                     </ModalContent>
                   </Modal>
-                  {/* <Mailto label="Contact Lister" mailto="kaylason8263@gmail.com"/> */}
-
-                  {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
-                    <FontAwesomeIcon
-                      icon={isLiked ? solidHeart : regularHeart}
-                      color={isLiked ? "red" : "black"}
-                    />
-                  </Button> */}
                   <Button>
                     <HeartButton id={element.id} />
                   </Button>
@@ -219,12 +211,9 @@ function ListingWithMap({
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
-            <Button marginLeft={5}>
-              <HeartButton />
-            </Button>
           </Heading>
 
-          <Text marginLeft={3} marginBottom={3} fontSize="2xl">
+          <Text marginLeft={3} marginBottom={3} fontSize="2xl" color={"gray"}>
             {selectedElement.address}
           </Text>
 
