@@ -1,7 +1,12 @@
 import * as React from "react";
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Route, BrowserRouter as Router, Routes, Switch } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  Switch,
+} from "react-router-dom";
 import Landing from "./pages/Landing";
 import Listings from "./pages/Listings";
 import Login from "./components/login/CardLogin";
@@ -23,7 +28,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/home" element={<Landing />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/chat" element={<ParentComponent />} />
+            <Route path="/chat/*" element={<ParentComponent />} />
             <Route path="/search/:city?/:zip?" element={<Listings />} />
             <Route path="/allListings" element={<Listings />} />
             <Route path="/signup" element={<Signup />} />
