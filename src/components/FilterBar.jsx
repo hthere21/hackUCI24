@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 import {
   Input,
@@ -20,11 +21,9 @@ function FilterBar({ searchParameters }) {
   const [type, setType] = useState(parameters.type || "");
   const [price, setPrice] = useState(parameters.price || 0);
   const [location, setLocation] = useState(parameters.city || "");
-  const [date, setDate] = useState(parameters.date || "");
-  // console.log("parameters", parameters);
-  // console.log(
-  //   `type: ${type}, price: ${price}, location: ${location}, date: ${date}`
-  // );
+  const [start, setStart] = useState(parameters.start || "");
+  const [end, setEnd] = useState(parameters.end || "");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (parameters.type) {
@@ -39,11 +38,48 @@ function FilterBar({ searchParameters }) {
       setLocation(parameters.city);
       // console.log("setCity", location);
     }
-    if (parameters.date) {
-      setDate(parameters.date);
+    if (parameters.start) {
+      setStart(parameters.start);
+      // console.log("setDate", date);
+    }
+    if (parameters.end) {
+      setStart(parameters.end);
       // console.log("setDate", date);
     }
   }, [parameters]);
+
+  const handleFilterClicked = () => {
+    // let cityParam = `city=${encodeURIComponent(location)}`;
+    // let priceParam = `price=${encodeURIComponent(price)}`;
+    // let typeParam = `type=${encodeURIComponent(type)}`;
+    // let startParam = `start=${encodeURIComponent(start)}`;
+    // let endParam = `end=${encodeURIComponent(end)}`;
+    // navigate(
+    //   `/search/?${cityParam}&${priceParam}&${typeParam}&${startParam}&${endParam}`
+    // );
+
+    let queryParams = [];
+
+    if (location) {
+      queryParams.push(`city=${encodeURIComponent(location)}`);
+    }
+    if (price) {
+      queryParams.push(`price=${encodeURIComponent(price)}`);
+    }
+    if (type) {
+      queryParams.push(`type=${encodeURIComponent(type)}`);
+    }
+    if (start) {
+      queryParams.push(`start=${encodeURIComponent(start)}`);
+    }
+    if (end) {
+      queryParams.push(`end=${encodeURIComponent(end)}`);
+    }
+
+    const queryString = queryParams.join("&");
+    navigate(`/search/?${queryString}`);
+  };
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -86,14 +122,25 @@ function FilterBar({ searchParameters }) {
                 <Input
                   type="date"
                   // selected={date}
-                  value={date}
-                  onChange={(d) => {
-                    setDate(d);
+                  value={start}
+                  onChange={(e) => {
+                    setStart(e.target.value);
+                  }}
+                />
+              </FormControl>
+
+              <FormControl>
+                <Input
+                  type="date"
+                  // selected={date}
+                  value={end}
+                  onChange={(e) => {
+                    setEnd(e.target.value);
                   }}
                 />
               </FormControl>
             </HStack>
-            <Button colorScheme="green" size="md">
+            <Button colorScheme="green" size="md" onClick={handleFilterClicked}>
               Filter
             </Button>
           </HStack>
