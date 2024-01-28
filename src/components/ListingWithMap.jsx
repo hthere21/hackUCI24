@@ -121,7 +121,7 @@ function ListingWithMap({ listings }) {
               <Text> Price: {selectedElement.price}</Text>
               <Text> Floor Plan: {selectedElement.floor_plan}</Text>
               <Text> Description: </Text>
-              <Text> Remember to change this to the description.</Text>
+              <Text> {selectedElement.description}</Text>
               <Text> Longitude: {selectedElement.longitude} </Text>
               <Text> Latitude: {selectedElement.latitude} </Text>
             </CardBody>
