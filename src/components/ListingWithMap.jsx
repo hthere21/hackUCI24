@@ -25,17 +25,14 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
+import { getFirestore, doc, deleteDoc } from "firebase/firestore";
 
-function ListingWithMap({ listings }) {
+function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
   const [selectedElement, setElement] = useState(null);
 
-  const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-    />
-  );
-  
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" />;
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
 
   const showClickedCard = (id) => {
@@ -54,6 +51,33 @@ function ListingWithMap({ listings }) {
         setLiked(!isLiked);
       }
     });
+  };
+
+  // Function to handle deleting a listing
+  // Function to handle deleting a listing
+  const handleDeleteListing = async (listingId) => {
+    try {
+      // Delete listing from Firestore
+      const db = getFirestore();
+      const listingDocRef = doc(db, "listings", listingId);
+      await deleteDoc(listingDocRef);
+
+      // Wait for the deletion to complete
+      // Then update the state to remove the deleted listing
+      setUserListings((prevListings) =>
+        prevListings.filter((listing) => listing.id !== listingId)
+      );
+
+      // Reset selectedElement state to null
+      setElement(null);
+
+      // Close the modal
+      onClose();
+
+      console.log("Listing deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting listing:", error);
+    }
   };
 
   // const showMap = (lat,long) =>
@@ -87,50 +111,60 @@ function ListingWithMap({ listings }) {
                   {element.address}
                 </Text>
                 <Text fontSize={"lg"} marginBottom={1}>
-                  {element.price}
+                  Prices: {element.price}
                 </Text>
                 <Text fontSize={"lg"} marginBottom={1}>
-                  {element.type}
+                  Description: {element.type}
                 </Text>
-                <Text fontSize={"lg"}>
-                  Pet friendly, Non-smoking, Clean, Fitness Building
-                </Text>
+                <Text fontSize={"lg"}>{element.description}</Text>
               </CardBody>
 
               <Center>
                 <CardFooter>
-                <Button onClick={() => {
-                  setOverlay(<OverlayOne />) 
-                  onOpen()
-                  }} 
-                  variant="solid" 
-                  colorScheme="teal"
+                  <Button
+                    onClick={() => {
+                      setOverlay(<OverlayOne />);
+                      onOpen();
+                    }}
+                    variant="solid"
+                    colorScheme="teal"
                   >
                     Contact Lister
                   </Button>
 
-                <Modal isOpen={isOpen} onClose={onClose}> 
-                  {overlay}
-                  <ModalContent>
-                    <ModalHeader>Lister Info</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody alignItems={"center"}>
-                      email: kaylason8263@gmail.com
-                    </ModalBody>
-
-                    <ModalFooter>
-                      <Button
+                  {/* Conditionally render delete button */}
+                  {showDeleteButton && (
+                    <Button
+                      onClick={() => handleDeleteListing(element.id)}
                       variant="solid"
-                      colorScheme="teal"
-                      onClick={() =>
-                        (window.location = "mailto:kaylason8263@gmail.com")
-                      }
-                      >
-                        Contact Now
-                      </Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
+                      colorScheme="red"
+                    >
+                      Delete Listing
+                    </Button>
+                  )}
+
+                  <Modal isOpen={isOpen} onClose={onClose}>
+                    {overlay}
+                    <ModalContent>
+                      <ModalHeader>Lister Info</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody alignItems={"center"}>
+                        email: kaylason8263@gmail.com
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button
+                          variant="solid"
+                          colorScheme="teal"
+                          onClick={() =>
+                            (window.location = "mailto:kaylason8263@gmail.com")
+                          }
+                        >
+                          Contact Now
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
                   {/* <Mailto label="Contact Lister" mailto="kaylason8263@gmail.com"/> */}
 
                   {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
