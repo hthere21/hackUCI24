@@ -14,9 +14,9 @@ function Favorites() {
         <Heading>Favorites</Heading>
       </Center>
 
-            <ListingWithMap listings={apartmentData}/>
-        </>
-    );
+      <ListingWithMap listings={apartmentData} />
+    </>
+  );
 }
 
 export default Favorites;

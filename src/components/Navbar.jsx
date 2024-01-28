@@ -36,18 +36,13 @@ function Navbar() {
 
   return (
     <>
-      <Box top="0" left="0" right="0" zIndex="999" bg="white" boxShadow="sm">
+      <Box top="0" left="0" right="0" zIndex="999" bg="#EEEEE" boxShadow="md">
         <Flex p={4}>
-          
           {/* Logout Button */}
-          {user ? (
-              <SignoutButton/>
-            ) : (
-              null
-          )}
+          {user ? <SignoutButton /> : null}
 
           <Spacer />
-          
+
           {/* Logo and Brand Name */}
           <Center>
             <Heading size="lg" fontWeight="bold">
@@ -63,8 +58,7 @@ function Navbar() {
               <Button
                 size="md"
                 marginRight={2}
-                borderLeftRadius={3.3}
-                borderRightRadius={3.3}
+                borderRadius={10}
                 fontSize={20}
                 onClick={() => navigate("/home")}
               >
@@ -73,8 +67,7 @@ function Navbar() {
               <Button
                 size="md"
                 marginRight={2}
-                borderLeftRadius={3.3}
-                borderRightRadius={3.3}
+                borderRadius={10}
                 fontSize={20}
                 onClick={() => navigate("/profile")}
               >
@@ -83,8 +76,7 @@ function Navbar() {
               <Button
                 size="md"
                 marginRight={2}
-                borderLeftRadius={3.3}
-                borderRightRadius={3.3}
+                borderRadius={10}
                 fontSize={20}
                 onClick={() => navigate("/manage-sublets")}
               >
@@ -93,8 +85,7 @@ function Navbar() {
               <Button
                 size="md"
                 marginRight={2}
-                borderLeftRadius={3.3}
-                borderRightRadius={3.3}
+                borderRadius={10}
                 fontSize={20}
                 onClick={() => navigate("/favorites")}
               >
@@ -104,8 +95,7 @@ function Navbar() {
               <Button
                 size="md"
                 marginRight={5}
-                borderLeftRadius={3.3}
-                borderRightRadius={3.3}
+                borderRadius={10}
                 fontSize={20}
                 onClick={() => navigate("/post")}
               >
@@ -116,15 +106,13 @@ function Navbar() {
             <Button
               size="md"
               marginRight={5}
-              borderLeftRadius={3.3}
-              borderRightRadius={3.3}
+              borderRadius={10}
               fontSize={20}
               onClick={() => navigate("/login")}
             >
               Login
             </Button>
           )}
-
         </Flex>
       </Box>
     </>
