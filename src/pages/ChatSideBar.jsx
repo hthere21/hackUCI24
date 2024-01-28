@@ -12,29 +12,28 @@ import { db } from "../config/firebase";
 
 const ChatSideBar = ({ userUid, onSelectChat }) => {
   const [chats, setChats] = useState([]);
+  const fetchChats = async () => {
+    try {
+      const usersCollection = collection(db, "users");
+      const usersSnapshot = await getDocs(usersCollection);
 
+      const chatList = [];
+      usersSnapshot.forEach((userDoc) => {
+        const userId = userDoc.id;
+        if (userId == userUid) {
+          chatList.push({
+            uid: userId,
+            name: userDoc.data().name,
+          });
+        }
+      });
+
+      setChats(chatList);
+    } catch (error) {
+      console.error("Error fetching chat list:", error);
+    }
+  };
   useEffect(() => {
-    const fetchChats = async () => {
-      try {
-        const usersCollection = collection(db, "users");
-        const usersSnapshot = await getDocs(usersCollection);
-
-        const chatList = [];
-        usersSnapshot.forEach((userDoc) => {
-          const userId = userDoc.id;
-          if (userId !== userUid) {
-            chatList.push({
-              uid: userId,
-              name: userDoc.data().name,
-            });
-          }
-        });
-
-        setChats(chatList);
-      } catch (error) {
-        console.error("Error fetching chat list:", error);
-      }
-    };
 
     fetchChats();
   }, [userUid]);
