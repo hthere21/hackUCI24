@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,14 +15,35 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-function FilterBar() {
-  const [type, setType] = useState("");
-  const [price, setPrice] = useState(0);
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState("");
-  console.log(
-    `type: ${type}, price: ${price}, location: ${location}, date: ${date}`
-  );
+function FilterBar({ searchParameters }) {
+  let parameters = searchParameters.searchParamsObject;
+  const [type, setType] = useState(parameters.type || "");
+  const [price, setPrice] = useState(parameters.price || 0);
+  const [location, setLocation] = useState(parameters.city || "");
+  const [date, setDate] = useState(parameters.date || "");
+  // console.log("parameters", parameters);
+  // console.log(
+  //   `type: ${type}, price: ${price}, location: ${location}, date: ${date}`
+  // );
+
+  useEffect(() => {
+    if (parameters.type) {
+      setType(parameters.type);
+      // console.log("setType", type);
+    }
+    if (parameters.price) {
+      setPrice(parameters.price);
+      // console.log("setPrice", price);
+    }
+    if (parameters.city) {
+      setLocation(parameters.city);
+      // console.log("setCity", location);
+    }
+    if (parameters.date) {
+      setDate(parameters.date);
+      // console.log("setDate", date);
+    }
+  }, [parameters]);
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -57,7 +78,7 @@ function FilterBar() {
                 <Input
                   type="location"
                   placeholder="Location"
-        
+                  value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 />
               </FormControl>

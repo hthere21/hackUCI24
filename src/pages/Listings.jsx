@@ -9,33 +9,11 @@ import { db, getDocs, collection, query, where } from "../config/firebase";
 function Listings() {
   const [listings, setListings] = useState([]);
   const [searchParams] = useSearchParams();
+  const searchParamsObject = Object.fromEntries(searchParams);
+  console.log(searchParamsObject);
+
   const city = searchParams.get("city");
   console.log("City", city);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const fetchedItems = await fetchListings();
-  //     setListings(fetchedItems);
-  //     // console.log(listings);
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // const fetchListings = async () => {
-  //   try {
-  //     const queryResults = await getDocs(query(collection(db, "listings")));
-  //     const items = queryResults.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //     }));
-  //     // console.log(items);
-  //     return items;
-  //   } catch (err) {
-  //     console.error(err);
-  //     return [];
-  //   }
-  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,7 +55,7 @@ function Listings() {
   return (
     <>
       <Navbar />
-      <FilterBar />
+      <FilterBar searchParameters={{ searchParamsObject }} />
       <ListingWithMap listings={listings} />
     </>
   );
