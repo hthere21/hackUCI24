@@ -90,19 +90,20 @@ const CollectionListForm = () => {
       let latitude = geoData.Records[0].Latitude;
       let longitude = geoData.Records[0].Longitude;
 
-      setCity(city.replace(/\W/g, "").toLowerCase);
+      let formattedCity = city.replace(/\W/g, "").toLowerCase();
+      let formattedState = state.toLowerCase();
+      setCity(formattedCity);
       setState(state.toLowerCase());
-
       let newListing = {
         address,
-        city,
+        city: formattedCity,
         description,
         end,
         imageUrl: defaultImageUrl, // Default image URL
         name,
         price,
         start,
-        state,
+        state: formattedState,
         type,
         zip,
         latitude,
@@ -146,6 +147,8 @@ const CollectionListForm = () => {
       setState("");
       setType("");
       setZip("");
+
+      navigate("/manage-sublets");
     } catch (error) {
       console.error("Error adding listing:", error);
       // Handle error
