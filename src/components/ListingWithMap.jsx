@@ -6,8 +6,7 @@ import HeartButton from "./HeartButton";
 import React from "react";
 import { useState } from "react";
 import apartmentData from "../fakeApartmentData";
-import HeartButton from "./HeartButton";
-import GoogleMapReact from 'google-map-react';
+import GoogleMapReact from "google-map-react";
 
 import {
   Grid,
@@ -23,11 +22,9 @@ import {
   CardFooter,
   Button,
   AspectRatio,
-  AspectRatio,
 } from "@chakra-ui/react";
 
-
-function ListingWithMap() {
+function ListingWithMap({ listings }) {
   const [selectedElement, setElement] = useState(null);
 
   const baseMapUrl = "https://www.google.com/maps/";
@@ -85,8 +82,8 @@ function ListingWithMap() {
                     Contact Lister
                   </Button>
 
-                  <Button marginLeft={3}> 
-                    <HeartButton/>
+                  <Button marginLeft={3}>
+                    <HeartButton />
                   </Button>
                 </CardFooter>
               </Center>
@@ -107,9 +104,9 @@ function ListingWithMap() {
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
-            <Button marginLeft={5}> 
-              <HeartButton/>
-             </Button>
+            <Button marginLeft={5}>
+              <HeartButton />
+            </Button>
           </Heading>
 
           <Text marginLeft={3} marginBottom={3} fontSize="2xl">
