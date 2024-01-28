@@ -10,7 +10,7 @@ import {
 import React from "react";
 
 function CardListing(props) {
-  const { name, address, city, state, zipcode, type, price, imageUrl } = props;
+  const { id, name, address, city, state, zipcode, type, price, imageUrl } = props;
   return (
     <>
       <Card maxW="sm" _hover={{ bg: "gray.200" }}>

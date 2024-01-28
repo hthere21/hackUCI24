@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import ListingWithMap from "../components/ListingWithMap";
-import { Center, Heading, Button } from "@chakra-ui/react";
+import { Center, Heading, Button, Flex } from "@chakra-ui/react";
 import { useAuth } from "../components/AuthContext";
 
 import {
@@ -68,7 +68,7 @@ function ManageSublet() {
       <Navbar />
       <Center marginTop={5} marginBottom={5}>
         <Heading fontFamily={"New Century Schoolbook"} fontSize={40}>
-          My Sublets
+          My SubLeases
         </Heading>
       </Center>
 
@@ -77,7 +77,7 @@ function ManageSublet() {
         setUserListings={setUserListings}
         showDeleteButton={true}
         renderListing={(listing) => (
-          <div key={listing.id}>
+          <Flex key={listing.id} spacing={3}>
             {/* Display listing information */}
             <p>{listing.name}</p>
             <p>{listing.address}</p>
@@ -85,7 +85,7 @@ function ManageSublet() {
             <Button onClick={() => handleDeleteListing(listing.id)}>
               Delete Listing
             </Button>
-          </div>
+          </Flex>
         )}
       />
     </>

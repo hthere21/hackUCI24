@@ -32,6 +32,7 @@ function Landing() {
           {apartmentData.map((element) => (
             <CardListing
               key={element.id}
+              id = {element.id}
               name={element.name}
               address={element.address}
               city={element.city}
