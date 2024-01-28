@@ -13,7 +13,7 @@ function Listings() {
   console.log(searchParamsObject);
 
   const city = searchParams.get("city");
-  console.log("City", city);
+  // console.log("City", city);
 
   useEffect(() => {
     const fetchData = async () => {
