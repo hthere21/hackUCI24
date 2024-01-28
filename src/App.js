@@ -1,10 +1,8 @@
 import * as React from "react";
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, Switch } from "react-router-dom";
 import Landing from "./pages/Landing";
-import LoginSuccess from "./pages/LoginSuccess";
-import SearchListings from "./pages/SearchListings";
 import Listings from "./pages/Listings";
 import Login from "./components/login/CardLogin";
 import Signup from "./components/signup/CardSignup";
@@ -14,7 +12,6 @@ import { AuthProvider } from "./components/AuthContext";
 import ListingsTest from "./pages/ListingsTest";
 import CollectionListForm from "./pages/CollectionListForm";
 import ParentComponent from "./pages/ParentComponent";
-import MelissaTest from "./pages/MelissaTest";
 import Favorites from "./pages/Favorites";
 
 function App() {
@@ -27,15 +24,13 @@ function App() {
             <Route path="/home" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/chat" element={<ParentComponent />} />
-            <Route path="/loginSuccess" element={<LoginSuccess />} />
-            <Route path="/searchResults" element={<SearchListings />} />
+            <Route path="/search/:city?/:zip?" element={<Listings />} />
             <Route path="/allListings" element={<Listings />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/additional-info" element={<AdditionalInfoForm />} />
             <Route path="/listingsTest" element={<ListingsTest />} />
             <Route path="/post" element={<CollectionListForm />} />
-            <Route path="/melissaTest" element={<MelissaTest />} />
             <Route path="/favorites" element={<Favorites />} />
             {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
           </Routes>

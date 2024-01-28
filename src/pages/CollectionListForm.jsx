@@ -15,8 +15,9 @@ import {
   Heading,
   Center,
   Card,
+  Box,
   NumberInput,
-  NumberInputField
+  NumberInputField,
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
@@ -159,7 +160,7 @@ const CollectionListForm = () => {
     setType("");
     setZip("");
     // Navigate back
-    navigate("/profile");
+    navigate(-1);
   };
 
   // List of U.S. states
@@ -219,125 +220,129 @@ const CollectionListForm = () => {
   return (
     <>
       <Navbar />
+      <Box backgroundColor={"#9eadc1"}>
+        <Center marginTop={10}>
+          <Heading>Listing Form</Heading>
+        </Center>
+        <Center>
+          <Card p={10} marginTop={10} maxW={"3xl"}>
+            <FormControl mt={4}>
+              <FormLabel>Title</FormLabel>
+              <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </FormControl>
 
-      <Center marginTop={10}>
-        <Heading>Listing Form</Heading>
-      </Center>
+            <FormControl>
+              <FormLabel>Address</FormLabel>
+              <Input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </FormControl>
 
-      <Card p={10} marginTop={10}>
-        <FormControl mt={4}>
-          <FormLabel>Title</FormLabel>
-          <Input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>City</FormLabel>
+              <Input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </FormControl>
 
-        <FormControl>
-          <FormLabel>Address</FormLabel>
-          <Input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Zip</FormLabel>
+              <Input
+                type="text"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
+              />
+            </FormControl>
 
-        <FormControl mt={4}>
-          <FormLabel>City</FormLabel>
-          <Input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>State</FormLabel>
+              <Select value={state} onChange={(e) => setState(e.target.value)}>
+                <option value="" disabled>
+                  Select a state
+                </option>
+                {usStates.map((usState) => (
+                  <option key={usState} value={usState}>
+                    {usState}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
 
-        <FormControl mt={4}>
-          <FormLabel>Zip</FormLabel>
-          <Input
-            type="text"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
-          />
-        </FormControl>
-
-        <FormControl mt={4}>
-          <FormLabel>State</FormLabel>
-          <Select value={state} onChange={(e) => setState(e.target.value)}>
-            <option value="" disabled>
-              Select a state
-            </option>
-            {usStates.map((usState) => (
-              <option key={usState} value={usState}>
-                {usState}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl mt={4}>
-          <FormLabel>Price</FormLabel>
-          {/* <Input
+            <FormControl mt={4}>
+              <FormLabel>Price</FormLabel>
+              {/* <Input
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           /> */}
-          <NumberInput>
-            <NumberInputField value={price} onChange={(e) => setPrice(e.target.value)}/>
-          </NumberInput>
+              <NumberInput>
+                <NumberInputField
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </NumberInput>
+            </FormControl>
 
-        </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Type</FormLabel>
+              <Input
+                type="text"
+                value={type}
+                placeholder="e.g.. 1 bedroom - 1 bathroom"
+                onChange={(e) => setType(e.target.value)}
+              />
+            </FormControl>
 
-        <FormControl mt={4}>
-          <FormLabel>Type</FormLabel>
-          <Input
-            type="text"
-            value={type}
-            placeholder="e.g.. 1 bedroom - 1 bathroom"
-            onChange={(e) => setType(e.target.value)}
-          />
-        </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Description</FormLabel>
+              <Input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </FormControl>
 
-        <FormControl mt={4}>
-          <FormLabel>Description</FormLabel>
-          <Input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Start (Timestamp)</FormLabel>
+              <Input
+                type="date"
+                value={start}
+                onChange={(e) => setStart(e.target.value)}
+              />
+              {/* You might want to use a date picker library for a better user experience */}
+            </FormControl>
 
-        <FormControl mt={4}>
-          <FormLabel>Start (Timestamp)</FormLabel>
-          <Input
-            type="date"
-            value={start}
-            onChange={(e) => setStart(e.target.value)}
-          />
-          {/* You might want to use a date picker library for a better user experience */}
-        </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>End Date</FormLabel>
+              <Input
+                type="date"
+                value={end}
+                onChange={(e) => setEnd(e.target.value)}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Image</FormLabel>
+              <Input type="file" onChange={handleImageChange} />
+            </FormControl>
 
-        <FormControl mt={4}>
-          <FormLabel>End Date</FormLabel>
-          <Input
-            type="date"
-            value={end}
-            onChange={(e) => setEnd(e.target.value)}
-          />
-        </FormControl>
-        <FormControl mt={4}>
-          <FormLabel>Image</FormLabel>
-          <Input type="file" onChange={handleImageChange} />
-        </FormControl>
+            <Button mt={4} colorScheme="teal" onClick={handleAddListing}>
+              Add Listing
+            </Button>
 
-        <Button mt={4} colorScheme="teal" onClick={handleAddListing}>
-          Add Listing
-        </Button>
-
-        <Button mt={4} colorScheme="blue" onClick={handleClearAndGoBack}>
-          Go Back
-        </Button>
-      </Card>
+            <Button mt={4} colorScheme="blue" onClick={handleClearAndGoBack}>
+              Go Back
+            </Button>
+          </Card>
+        </Center>
+      </Box>
     </>
   );
 };
