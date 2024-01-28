@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import ListingWithMap from "../components/ListingWithMap";
 import LoadingCard from "../components/login/LoadingCard";
-import { Box, Button, Text, Heading, Center, Image } from "@chakra-ui/react";
+import FavoritesCard from "../components/FavoritesCard";
+import {
+  Box,
+  Button,
+  Text,
+  Heading,
+  Center,
+  Image,
+  Flex,
+} from "@chakra-ui/react";
 import {
   doc,
   getDoc,
@@ -136,6 +144,22 @@ function Favorites() {
         <LoadingCard />
       ) : (
         <>
+          <FavoritesCard
+            listings={filteredApartments}
+            // setUserListings={setUserListings}
+            showDeleteButton={true}
+            renderListing={(listing) => (
+              <Flex key={listing.id} spacing={3}>
+                {/* Display listing information */}
+                <p>{listing.name}</p>
+                <p>{listing.address}</p>
+                {/* Add a button to delete the listing */}
+                <Button onClick={() => handleRemoveListing(listing.id)}>
+                  Remove Favorite
+                </Button>
+              </Flex>
+            )}
+          />
           {filteredApartments.map((listing) => (
             <Box key={listing.id} borderWidth="1px" borderRadius="lg" p="4">
               {/* Image */}

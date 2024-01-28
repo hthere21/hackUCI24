@@ -59,7 +59,7 @@ function Navbar() {
                 fontFamily={"Brush Script MT"}
                 size="2xl"
                 fontWeight="bold"
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/allListings")}
               >
                 ZotLease
               </Heading>
