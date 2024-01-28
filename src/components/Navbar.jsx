@@ -45,7 +45,7 @@ function Navbar() {
 
           {/* Logo and Brand Name */}
           <Center>
-            <Heading size="lg" fontWeight="bold">
+            <Heading fontFamily={"Brush Script MT"} size="2xl" fontWeight="bold">
               ZotLease
             </Heading>
           </Center>
