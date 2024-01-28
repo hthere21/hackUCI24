@@ -75,36 +75,42 @@ function ListingWithMap() {
           </Card>
         ))}
       </GridItem>
-      <GridItem w="100%" h="10">
-        <Image
-          objectFit="cover"
-          src={selectedElement.imageUrl}
-          alt="Apartment"
-          width="100%"
-          height="425px"
-        />
-        <Heading marginTop={3} marginLeft={3} fontSize="6xl"> 
-          {selectedElement.name}
-        </Heading>
 
-        <Text marginLeft={3} marginBottom={3} fontSize="2xl"> 
-          {selectedElement.address}
-        </Text>
-
-        <Card> 
-          <Heading marginLeft={3}> 
-            About the Place
-          </Heading>
-
-          <CardBody> 
-            <Text> Price: {selectedElement.price}</Text>
-            <Text> Floor Plan: {selectedElement.floor_plan}</Text>
-            <Text> Description: </Text>
-            <Text> BLahbahlbahl</Text>
-          </CardBody>
-        </Card>
-
-      </GridItem>
+      {/* Detailed Property */}
+      {selectedElement ? (
+              <GridItem w="100%" h="10">
+              <Image
+                objectFit="cover"
+                src={selectedElement.imageUrl}
+                alt="Apartment"
+                width="100%"
+                height="425px"
+              />
+              <Heading marginTop={3} marginLeft={3} fontSize="6xl"> 
+                {selectedElement.name}
+              </Heading>
+      
+              <Text marginLeft={3} marginBottom={3} fontSize="2xl"> 
+                {selectedElement.address}
+              </Text>
+      
+              <Card> 
+                <Heading marginLeft={3}> 
+                  About the Place
+                </Heading>
+      
+                <CardBody> 
+                  <Text> Price: {selectedElement.price}</Text>
+                  <Text> Floor Plan: {selectedElement.floor_plan}</Text>
+                  <Text> Description: </Text>
+                  <Text> Remember to change this to the description.</Text>
+                </CardBody>
+              </Card>
+      
+            </GridItem>
+            ) : (
+              null
+          )}
     </Grid>
 
     // {showClickedCard}

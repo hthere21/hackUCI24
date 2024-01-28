@@ -29,7 +29,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/additional-info" element={<AdditionalInfoForm />} />
             <Route path="/listingsTest" element={<ListingsTest />} />
-            {/* <Route path="/allListings/:listingID" element={<ListingCard />} /> */}
           </Routes>
         </Router>
       </ChakraProvider>

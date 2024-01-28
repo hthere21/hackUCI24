@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   Input,
+  Button,
   Select,
   Box,
   Flex,
@@ -54,6 +55,7 @@ function FilterBar() {
                   }}
                 />
               </Box>
+              <Button>john</Button>
             </HStack>
           </HStack>
         </Flex>
