@@ -16,6 +16,7 @@ import {
   Center,
   CardFooter,
   Button,
+  Modal
 } from "@chakra-ui/react";
 
 function ListingWithMap({ listings }) {
@@ -83,7 +84,7 @@ function ListingWithMap({ listings }) {
               <Center>
                 <CardFooter>
                   <Button variant="solid" colorScheme="teal">
-                    Contact Lister
+                  <a href={`mailto:${elementSelected.email}`}>Contact Lister</a>
                   </Button>
 
                   {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
