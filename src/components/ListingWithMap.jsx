@@ -84,7 +84,7 @@ function ListingWithMap({ listings }) {
               <Center>
                 <CardFooter>
                   <Button variant="solid" colorScheme="teal">
-                  <a href={`mailto:${elementSelected.email}`}>Contact Lister</a>
+                      <a href={`mailto:${elementSelected.email}`}>Contact Lister</a>
                   </Button>
 
                   {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
