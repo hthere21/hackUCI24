@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HeartButton from "./HeartButton";
+import Mailto from "./Mailto";
 
 import { Map, Marker } from "pigeon-maps";
 
@@ -82,11 +83,16 @@ function ListingWithMap({ listings }) {
 
               <Center>
                 <CardFooter>
-                  <Button variant="solid" colorScheme="teal">
-                    <a href={`mailto:${selectedElement.email}`}>
-                      Contact Lister
-                    </a>
+                  <Button
+                    variant="solid"
+                    colorScheme="teal"
+                    onClick={() =>
+                      (window.location = "mailto:kaylason8263@gmail.com")
+                    }
+                  >
+                    Contact Lister
                   </Button>
+                  {/* <Mailto label="Contact Lister" mailto="kaylason8263@gmail.com"/> */}
 
                   {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
                     <FontAwesomeIcon
