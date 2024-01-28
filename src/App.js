@@ -13,6 +13,7 @@ import AdditionalInfoForm from "./pages/AdditionalInfoForm";
 import { AuthProvider } from "./components/AuthContext";
 import ListingsTest from "./pages/ListingsTest";
 import CollectionListForm from "./pages/CollectionListForm";
+import ParentComponent from "./pages/ParentComponent";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/home" element={<Landing />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/chat" element={<ParentComponent />} />
             <Route path="/loginSuccess" element={<LoginSuccess />} />
             <Route path="/searchResults" element={<SearchListings />} />
             <Route path="/allListings" element={<Listings />} />

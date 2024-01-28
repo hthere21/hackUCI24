@@ -1,5 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  query,
+} from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
 import {
@@ -25,27 +33,28 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app); // Correct export for firestore
-export const googleProvider = new GoogleAuthProvider();
-export {
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  signInWithEmailAndPassword,
-  setPersistence,
-  createUserWithEmailAndPassword,
-  browserLocalPersistence,
-  
-};
+
+const auth = getAuth(app);
+const db = getFirestore(app); // Correct export for firestore
+const googleProvider = new GoogleAuthProvider();
 
 export {
+  auth,
+  onAuthStateChanged,
+  signOut,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  db, // Include the Firestore export here
+  googleProvider,
   getFirestore,
   collection,
   doc,
   setDoc,
   getDoc,
   getDocs,
-  query
-}
+  query,
+};
 // const analytics = getAnalytics(app);
