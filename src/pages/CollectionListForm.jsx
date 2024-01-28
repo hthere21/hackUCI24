@@ -27,6 +27,7 @@ import {
   NumberInputField,
   Alert,
   AlertIcon,
+  Textarea,
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
@@ -389,8 +390,14 @@ const CollectionListForm = () => {
 
                     <FormControl mt={4}>
                       <FormLabel>Description</FormLabel>
-                      <Input
+                      {/* <Input
                         type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      /> */}
+
+                      <Textarea
+                        placeholder="Write a short description about your listing"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                       />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import HeartButton from "./HeartButton";
 import Mailto from "./Mailto";
@@ -27,13 +27,19 @@ import {
 } from "@chakra-ui/react";
 import { getFirestore, doc, deleteDoc } from "firebase/firestore";
 
-function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
+function ListingWithMap({
+  listings,
+  showDeleteButton,
+  setUserListings,
+  selectedListingId = "0Myi1lJDPmuXwicvFUjP",
+}) {
+  console.log(selectedListingId);
   const [selectedElement, setElement] = useState(null);
 
   const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" />;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [overlay, setOverlay] = React.useState(<OverlayOne />);
+  const [overlay, setOverlay] = useState(<OverlayOne />);
 
   const showClickedCard = (id) => {
     listings.filter((element) => {
@@ -42,6 +48,12 @@ function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
       }
     });
   };
+
+  useEffect(() => {
+    if (selectedListingId) {
+      showClickedCard(selectedListingId);
+    }
+  }, [selectedListingId]);
 
   const [isLiked, setLiked] = useState(false);
 
