@@ -81,8 +81,8 @@ function FilterBar({ searchParameters }) {
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                 >
-                  <option>Apartments</option>
-                  <option>Rooms</option>
+                  <option value={"Apartment"}>Apartments</option>
+                  <option value={"Room"}>Rooms</option>
                 </Select>
               </FormControl>
               <FormControl>
@@ -94,7 +94,7 @@ function FilterBar({ searchParameters }) {
                   <option value={1000}>{"$1,000"}</option>
                   <option value={2000}>{"$2,000"}</option>
                   <option value={3000}>{"$3,000"}</option>
-                  <option value={10000}>{"$3,000+"}</option>
+                  <option value={100000}>{"$3,000+"}</option>
                 </Select>
               </FormControl>
 

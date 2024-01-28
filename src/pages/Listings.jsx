@@ -4,48 +4,119 @@ import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import FilterBar from "../components/FilterBar";
 import ListingWithMap from "../components/ListingWithMap";
-import { db, getDocs, collection, query, where } from "../config/firebase";
+import {
+  db,
+  getDocs,
+  collection,
+  query,
+  where,
+  Timestamp,
+} from "../config/firebase";
 
 function Listings() {
   const [listings, setListings] = useState([]);
   const [searchParams] = useSearchParams();
   const searchParamsObject = Object.fromEntries(searchParams);
-  console.log(searchParamsObject);
 
-  const city = searchParams.get("city");
-  // console.log("City", city);
+  // const city = searchParams.get("city");
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedItems = await fetchListings();
+      const filterParams = {
+        city: searchParams.get("city"),
+        type: searchParams.get("type"),
+        price: searchParams.get("price"),
+        start: searchParams.get("start"),
+        end: searchParams.get("end"),
+      };
+      const fetchedItems = await fetchListings(filterParams);
       setListings(fetchedItems);
     };
 
     fetchData();
-  }, [city]);
+  }, [searchParams]);
 
-  const fetchListings = async () => {
+  const fetchListings = async (filters) => {
+    const allFiltersNull = Object.values(filters).every(
+      (value) => value === null
+    );
+
+    if (allFiltersNull) {
+      console.log("no filters");
+      try {
+        const queryResults = await getDocs(query(collection(db, "listings")));
+        const items = queryResults.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log(items);
+        return items;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     try {
-      let listingsQuery;
+      const listingsRef = collection(db, "listings");
+      let promises = [];
 
-      if (city) {
-        // Query listings based on the city parameter
-        let filteredCity = city.replace(/\W/g, "").toLowerCase();
-        listingsQuery = query(
-          collection(db, "listings"),
-          where("city", "==", filteredCity)
+      // Create separate queries for each filter
+      if (filters.city) {
+        let filteredCity = filters.city.replace(/\W/g, "").toLowerCase();
+        promises.push(
+          getDocs(query(listingsRef, where("city", "==", filteredCity)))
         );
-      } else {
-        // Query all listings if no city parameter is provided
-        listingsQuery = query(collection(db, "listings"));
+      }
+      if (filters.type) {
+        promises.push(
+          getDocs(query(listingsRef, where("type", "==", filters.type)))
+        );
+      }
+      if (filters.price) {
+        promises.push(
+          getDocs(
+            query(listingsRef, where("price", "<=", Number(filters.price)))
+          )
+        );
+      }
+      if (filters.start) {
+        let startDate = Timestamp.fromDate(new Date(filters.start));
+        promises.push(
+          getDocs(query(listingsRef, where("start", ">=", startDate)))
+        );
+      }
+      if (filters.end) {
+        let endDate = Timestamp.fromDate(new Date(filters.end));
+        promises.push(getDocs(query(listingsRef, where("end", "<=", endDate))));
       }
 
-      const queryResults = await getDocs(listingsQuery);
-      const items = queryResults.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      return items;
+      // Fetch and process the results of each query
+      const allResults = await Promise.all(promises);
+      // console.log("all results", allResults);
+
+      let resultsForEachQuery = allResults.map((querySnapshot) =>
+        querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
+
+      // console.log("Results for each query:", resultsForEachQuery);
+
+      // Check if there are no results from any query
+      if (resultsForEachQuery.some((results) => results.length === 0)) {
+        return []; // No intersection possible if any query returned no results
+      }
+
+      // Start with the first query's results as the initial intersection
+      let intersection = resultsForEachQuery[0];
+
+      // Find the intersection with the rest of the queries
+      for (let i = 1; i < resultsForEachQuery.length; i++) {
+        intersection = intersection.filter((item1) =>
+          resultsForEachQuery[i].some((item2) => item2.id === item1.id)
+        );
+      }
+
+      // console.log("Intersected listings:", intersection);
+      return intersection;
     } catch (err) {
       console.error(err);
       return [];

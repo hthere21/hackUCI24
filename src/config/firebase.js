@@ -9,6 +9,7 @@ import {
   query,
   where,
   updateDoc,
+  Timestamp,
 } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
@@ -60,5 +61,6 @@ export {
   query,
   where,
   updateDoc,
+  Timestamp,
 };
 // const analytics = getAnalytics(app);
