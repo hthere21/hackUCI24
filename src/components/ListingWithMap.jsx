@@ -2,17 +2,13 @@ import HeartButton from "./HeartButton";
 
 import React from "react";
 import { useState } from "react";
-import apartmentData from "../fakeApartmentData";
 import { Map, Marker } from "pigeon-maps";
 
 import {
-  Grid,
   SimpleGrid,
   Box,
-  GridItem,
   Card,
   Image,
-  Flex,
   Stack,
   CardBody,
   Heading,
@@ -20,7 +16,6 @@ import {
   Center,
   CardFooter,
   Button,
-  AspectRatio,
 } from "@chakra-ui/react";
 
 function ListingWithMap({ listings }) {
@@ -93,12 +88,7 @@ function ListingWithMap({ listings }) {
 
       {/* Detailed Property */}
       {selectedElement ? (
-        <Box
-          width="100%"
-          margin={0}
-          padding={0}
-          backgroundColor={"#EAEAEA"}
-        >
+        <Box width="100%" margin={0} padding={0} backgroundColor={"#EAEAEA"}>
           <Image
             objectFit="cover"
             src={selectedElement.imageUrl}
@@ -148,12 +138,7 @@ function ListingWithMap({ listings }) {
           </Map>
         </Box>
       ) : (
-        <Box
-          width="100%"
-          margin={0}
-          padding={0}
-          backgroundColor={"#EAEAEA"}
-        >
+        <Box width="100%" margin={0} padding={0} backgroundColor={"#EAEAEA"}>
           <Center>
             <Image
               objectFit="cover"

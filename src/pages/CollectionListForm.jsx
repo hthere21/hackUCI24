@@ -11,7 +11,6 @@ import {
   FormControl,
   FormLabel,
   Container,
-  Flex,
   Stack,
   Input,
   Select,
@@ -69,8 +68,9 @@ const CollectionListForm = () => {
       const data = await response.json();
       console.log("Data retrieve success", data);
       return data; // Return the data for immediate use
-    } catch (error) {
-      setError(error);
+    } catch (err) {
+      setError(err);
+      console.log(error);
       return null; // Return null in case of an error
     }
   };

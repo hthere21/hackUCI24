@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import ListingWithMap from "../components/ListingWithMap";
 import apartmentData from "../fakeApartmentData";
 
-import { Box, Button, Flex, Heading, Spacer, Center } from "@chakra-ui/react";
+import {Heading, Center } from "@chakra-ui/react";
 
 function Favorites() {
   return (
