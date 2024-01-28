@@ -1,7 +1,12 @@
 import * as React from "react";
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Route, BrowserRouter as Router, Routes, Switch } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  Switch,
+} from "react-router-dom";
 import Landing from "./pages/Landing";
 import Listings from "./pages/Listings";
 import Login from "./components/login/CardLogin";
