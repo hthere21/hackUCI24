@@ -24,8 +24,6 @@ import {
 function ListingWithMap({ listings }) {
   const [selectedElement, setElement] = useState(null);
 
-  const baseMapUrl = "https://www.google.com/maps/";
-
   const showClickedCard = (id) => {
     listings.filter((element) => {
       if (element.id === id) {
@@ -91,7 +89,7 @@ function ListingWithMap({ listings }) {
 
       {/* Detailed Property */}
       {selectedElement ? (
-        <GridItem w="100%" h="10" backgroundColor={"#EAEAEA"}> 
+        <GridItem w="100%" h="10" backgroundColor={"#EAEAEA"}>
           <Image
             objectFit="cover"
             src={selectedElement.imageUrl}
@@ -120,12 +118,15 @@ function ListingWithMap({ listings }) {
               <Text> Remember to change this to the description.</Text>
               <Text> Longitude: {selectedElement.longitude} </Text>
               <Text> Latitude: {selectedElement.latitude} </Text>
-              
             </CardBody>
           </Card>
 
-          <Map height={500} defaultCenter={[selectedElement.longitude, selectedElement.latitude]} defaultZoom={11}>
-            <Marker width={50} anchor={[selectedElement.longitude, selectedElement.latitude]} />
+          <Map
+            height={500}
+            defaultCenter={[33.681691, -117.844417]}
+            defaultZoom={20}
+          >
+            <Marker width={50} anchor={[33.681691, -117.844417]} />
           </Map>
         </GridItem>
       ) : (
