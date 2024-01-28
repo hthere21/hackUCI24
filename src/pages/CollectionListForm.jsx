@@ -25,6 +25,7 @@ import {
   Box,
   NumberInput,
   NumberInputField,
+  Textarea,
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
@@ -91,6 +92,7 @@ const CollectionListForm = () => {
       const defaultImageUrl =
         "https://www.irvinecompany.com/images/apartments-1-1080x720.webp";
 
+      let email = auth.currentUser.email;
       const geoData = await fetchData(generateMelissaUrl());
       let latitude = geoData.Records[0].Latitude;
       let longitude = geoData.Records[0].Longitude;
@@ -104,6 +106,7 @@ const CollectionListForm = () => {
         city: formattedCity,
         description,
         end: Timestamp.fromDate(new Date(end)),
+        email,
         imageUrl: defaultImageUrl, // Default image URL
         name,
         price: Number(price),
@@ -371,8 +374,9 @@ const CollectionListForm = () => {
 
                     <FormControl mt={4}>
                       <FormLabel>Description</FormLabel>
-                      <Input
-                        type="text"
+
+                      <Textarea
+                        placeholder="Write a short description about your listing"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                       />
