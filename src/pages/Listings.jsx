@@ -38,7 +38,7 @@ function Listings() {
 
   const fetchListings = async (filters) => {
     const allFiltersNull = Object.values(filters).every(
-      (value) => value === null
+      (value) => value === null || value === ""
     );
 
     if (allFiltersNull) {
