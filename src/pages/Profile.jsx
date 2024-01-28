@@ -70,11 +70,11 @@ function Profile() {
                 
               </div>
             )}
-          </div>
+          {/* </div>
         ) : (
           <p>No user logged in.</p>
         )}
-      </div> */}
+      </div>  */}
     </>
   );
 }

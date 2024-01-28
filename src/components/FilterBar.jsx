@@ -28,7 +28,7 @@ function FilterBar() {
               <Box width="100%">
                 <Text>I am looking for: </Text>
               </Box>
-              <Select placeholder="">
+              <Select placeholder="" >
                 <option>Apartments</option>
                 <option>Rooms</option>
                 {/* <option></option> */}
