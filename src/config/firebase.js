@@ -10,6 +10,7 @@ import {
   where,
   updateDoc,
   Timestamp,
+  limit,
 } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
@@ -62,5 +63,6 @@ export {
   where,
   updateDoc,
   Timestamp,
+  limit,
 };
 // const analytics = getAnalytics(app);

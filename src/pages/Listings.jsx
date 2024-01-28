@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import FilterBar from "../components/FilterBar";
 import ListingWithMap from "../components/ListingWithMap";
@@ -17,8 +17,8 @@ function Listings() {
   const [listings, setListings] = useState([]);
   const [searchParams] = useSearchParams();
   const searchParamsObject = Object.fromEntries(searchParams);
-
-  // const city = searchParams.get("city");
+  const { selectedListing } = useParams();
+  console.log(selectedListing);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -127,7 +127,7 @@ function Listings() {
     <>
       <Navbar />
       <FilterBar searchParameters={{ searchParamsObject }} />
-      <ListingWithMap listings={listings} />
+      <ListingWithMap listings={listings} selectedListingId={selectedListing} />
     </>
   );
 }
