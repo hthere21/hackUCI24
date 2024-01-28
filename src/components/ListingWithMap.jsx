@@ -42,11 +42,6 @@ function ListingWithMap({
   const [overlay, setOverlay] = useState(<OverlayOne />);
 
   const showClickedCard = (id) => {
-    // listings.filter((element) => {
-    //   if (element.id === id) {
-    //     setElement(element);
-    //   }
-    // });
     const foundElement = listings.find((element) => element.id === id);
     if (foundElement) {
       setElement(foundElement);
