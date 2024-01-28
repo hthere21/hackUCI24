@@ -82,12 +82,12 @@ function Listings() {
       if (filters.start) {
         let startDate = Timestamp.fromDate(new Date(filters.start));
         promises.push(
-          getDocs(query(listingsRef, where("start", ">=", startDate)))
+          getDocs(query(listingsRef, where("start", "<=", startDate)))
         );
       }
       if (filters.end) {
         let endDate = Timestamp.fromDate(new Date(filters.end));
-        promises.push(getDocs(query(listingsRef, where("end", "<=", endDate))));
+        promises.push(getDocs(query(listingsRef, where("end", ">=", endDate))));
       }
 
       // Fetch and process the results of each query
