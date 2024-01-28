@@ -32,6 +32,8 @@ function ListingWithMap({ listings }) {
     });
   };
 
+  // const showMap = (lat,long) =>
+
   // console.log(selectedElement);
   return (
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
@@ -123,10 +125,19 @@ function ListingWithMap({ listings }) {
 
           <Map
             height={500}
-            defaultCenter={[33.681691, -117.844417]}
-            defaultZoom={20}
+            center={[
+              parseFloat(selectedElement.latitude),
+              parseFloat(selectedElement.longitude),
+            ]}
+            defaultZoom={17}
           >
-            <Marker width={50} anchor={[33.681691, -117.844417]} />
+            <Marker
+              width={50}
+              anchor={[
+                parseFloat(selectedElement.latitude),
+                parseFloat(selectedElement.longitude),
+              ]}
+            />
           </Map>
         </GridItem>
       ) : (
