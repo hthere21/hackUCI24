@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { auth, createUserWithEmailAndPassword } from "../../config/firebase";
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  db,
+  doc,
+  setDoc,
+} from "../../config/firebase";
 
 import {
   Input,
@@ -16,7 +22,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { FaUserAlt, FaLock } from "react-icons/fa";
 
@@ -27,14 +33,20 @@ export const EmailSignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const toast = useToast();
 
   const handleSignUpWithEmail = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredentials.user;
+
       toast({
         title: "Signup Successful",
         description: "debug use only",
@@ -42,6 +54,20 @@ export const EmailSignupForm = () => {
         duration: 1000,
         isClosable: true,
       });
+
+      // add user to db
+      try { 
+        await setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+        });
+        console.log("added user to DB");
+      } catch (err) {
+        console.log("Add user to db error: ")
+        console.error(err);
+      }
+      
+      navigate("/home");
+
     } catch (err) {
       console.error(err);
 
@@ -62,10 +88,6 @@ export const EmailSignupForm = () => {
       });
     }
   };
-
-  useEffect(() => {
-    console.log("Email, password ", email, password);
-  }, [email, password]);
 
   return (
     <form>

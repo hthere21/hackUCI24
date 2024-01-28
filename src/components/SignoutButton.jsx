@@ -1,7 +1,10 @@
 import { auth } from "../config/firebase";
 import { Button, useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export const SignoutButton = () => {
+  const navigate = useNavigate();
+
   const toast = useToast();
   const handleSignOut = async () => {
     try {
@@ -12,6 +15,7 @@ export const SignoutButton = () => {
         duration: 1000,
         isClosable: true,
       });
+      navigate("/home");
     } catch (err) {
       toast({
         title: "Sign out Failed",
@@ -26,15 +30,15 @@ export const SignoutButton = () => {
   return (
     <>
       <Button
-                size="md"
-                marginLeft={5}
-                borderLeftRadius={3.3}
-                borderRightRadius={3.3}
-                fontSize={20}
-                onClick={handleSignOut}
-              >
-                Logout
-              </Button>
+        size="md"
+        marginLeft={5}
+        borderLeftRadius={3.3}
+        borderRightRadius={3.3}
+        fontSize={20}
+        onClick={handleSignOut}
+      >
+        Logout
+      </Button>
     </>
   );
 };

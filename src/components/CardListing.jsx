@@ -13,7 +13,7 @@ function CardListing(props) {
   const { name, address, city, state, zipcode, type, price, imageUrl } = props;
   return (
     <>
-      <Card maxW="sm">
+      <Card maxW="sm" _hover={{ bg: "gray.200" }}>
         <CardBody>
           <Image
             src={imageUrl}

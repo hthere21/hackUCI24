@@ -8,58 +8,59 @@ import {
   googleProvider,
   onAuthStateChanged,
   signInWithPopup,
-  // signOut,
-  // setPersistence,
-  // browserLocalPersistence,
+  db,
 } from "../../config/firebase";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
-const firestore = getFirestore();
+// const firestore = getFirestore();
 
 export const GoogleLoginButton = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const { user, updateUser } = useAuth();
 
-  console.log("Currently signed in user: " + user?.uid);
+  // console.log("Currently signed in user: " + user?.uid);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         updateUser(currentUser);
+        console.debug("current user: ", user);
 
         // Check if the user exists in Firestore
-        const userRef = doc(firestore, "users", currentUser.uid);
+        const userRef = doc(db, "users", currentUser.uid);
         const userDoc = await getDoc(userRef);
 
-        // if (!userDoc.exists()) {
-        //   // User doesn't exist in Firestore, prompt them to fill out a form
-        //   navigate("/additional-info");
-        // } else {
-        //   // User exists, proceed to the home page
-        //   toast({
-        //     title: "Login Successful",
-        //     description: "debug use only",
-        //     status: "success",
-        //     duration: 1000,
-        //     isClosable: true,
-        //   });
-          navigate("/home");
-        // }
+        if (!userDoc.exists()) {
+          // User doesn't exist in db, add to db
+          try {
+            await setDoc(doc(db, "users", user.uid), {
+              email: user.email,
+            });
+            console.log("added user to DB");
+          } catch (err) {
+            console.log("Add user to db error: ");
+            console.error(err);
+          }
+        } else {
+          // User exists, proceed to the home page
+          toast({
+            title: "Login Successful",
+            description: "debug use only",
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+          });
+        }
+        navigate("/home");
       } else {
-
-        // User is signed out
-//         console.log(user);
-//         console.log("User signed out");
-//         setUser(null);
-// =======
         updateUser(null);
       }
     });
 
     return () => unsubscribe();
 
-//   });
+    //   });
   }, [updateUser, navigate]);
 
   const handleSignInWithGoogle = async () => {

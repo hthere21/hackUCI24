@@ -1,4 +1,6 @@
 import React from "react";
+import { useState } from "react";
+import apartmentData from "../fakeApartmentData";
 import {
   Grid,
   GridItem,
@@ -8,50 +10,104 @@ import {
   CardBody,
   Heading,
   Text,
+  Textarea,
+  Center,
   CardFooter,
   Button,
 } from "@chakra-ui/react";
 
 function ListingWithMap() {
+  const [selectedElement, setElement] = useState({});
+  const showClickedCard = (id) => {
+    apartmentData.filter((element) => {
+      if (element.id === id) {
+        setElement(element);
+      }
+    });
+  };
+  // console.log(selectedElement);
   return (
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+      {/* All the card listings */}
       <GridItem w="100%" h="10">
-        <Card
-          direction={{ base: "column", sm: "row" }}
-          overflow="hidden"
-          variant="outline"
-        >
-          <Image
-            objectFit="cover"
-            maxW={{ base: "100%", sm: "200px" }}
-            src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-            alt="Caffe Latte"
-          />
+        {apartmentData.map((element) => (
+          <Card
+            key={element.id}
+            direction={{ base: "column", sm: "row" }}
+            overflow="hidden"
+            variant="outline"
+            _hover={{ bg: "gray.200" }}
+            onClick={() => showClickedCard(element.id)}
+          >
+            <Image
+              objectFit="cover"
+              maxW={{ base: "100%", sm: "250px" }}
+              src={element.imageUrl}
+              alt="Apartment"
+              width={""}
+            />
 
-          <Stack>
-            <CardBody>
-              <Heading size="md">Broadway</Heading>
-              <Text color={"gray"}>333 Silly Ave</Text>
-              <Text>$200 - $500</Text>
-              <Text>Apartment</Text>
-              <Text>Pet friendly, Non-smoking, Clean, Fitness Building</Text>
-              <Text py="2">
-                Caffè latte is a coffee beverage of Italian origin made with
-                espresso and steamed milk.
-              </Text>
-            </CardBody>
+            <Stack>
+              <CardBody>
+                <Heading fontSize={"3xl"}>{element.name}</Heading>
+                <Text fontSize={"lg"} color={"gray"} marginBottom={4}>
+                  {element.address}
+                </Text>
+                <Text fontSize={"lg"} marginBottom={1}>
+                  {element.price}
+                </Text>
+                <Text fontSize={"lg"} marginBottom={1}>
+                  {element.floor_plan}
+                </Text>
+                <Text fontSize={"lg"}>
+                  Pet friendly, Non-smoking, Clean, Fitness Building
+                </Text>
+              </CardBody>
 
-            <CardFooter>
-              <Button variant="solid" colorScheme="blue">
-                Contact Lister
-              </Button>
-            </CardFooter>
-          </Stack>
-        </Card>
+              <Center>
+                <CardFooter>
+                  <Button variant="solid" colorScheme="teal">
+                    Contact Lister
+                  </Button>
+                </CardFooter>
+              </Center>
+            </Stack>
+          </Card>
+        ))}
       </GridItem>
+      <GridItem w="100%" h="10">
+        <Image
+          objectFit="cover"
+          src={selectedElement.imageUrl}
+          alt="Apartment"
+          width="100%"
+          height="425px"
+        />
+        <Heading marginTop={3} marginLeft={3} fontSize="6xl"> 
+          {selectedElement.name}
+        </Heading>
 
-      <GridItem w="100%" h="10" bg="papayawhip" />
+        <Text marginLeft={3} marginBottom={3} fontSize="2xl"> 
+          {selectedElement.address}
+        </Text>
+
+        <Card> 
+          <Heading marginLeft={3}> 
+            About the Place
+          </Heading>
+
+          <CardBody> 
+            <Text> Price: {selectedElement.price}</Text>
+            <Text> Floor Plan: {selectedElement.floor_plan}</Text>
+            <Text> Description: </Text>
+            <Text> BLahbahlbahl</Text>
+          </CardBody>
+        </Card>
+
+      </GridItem>
     </Grid>
+
+    // {showClickedCard}
   );
 }
 

@@ -1,6 +1,8 @@
 import React from "react";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
-  FormControl,
   Input,
   Select,
   Box,
@@ -11,37 +13,24 @@ import {
 } from "@chakra-ui/react";
 
 function FilterBar() {
+  const [type, setType] = useState("");
+  const [price, setPrice] = useState(0);
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState(null);
+  // console.log(queryData);
   return (
     <>
-      {/* <Stack
-        top="0"
-        left="0"
-        right="0"
-        zIndex="999"
-        bg="gray"
-        boxShadow="sm"
-        flexDirection={"row"}
-      >
-        <Flex p={4}>
-          
-        </Flex>
-      </Stack> */}
-
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
-            <HStack
-              // as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
+            <HStack spacing={4} display={{ base: "none", md: "flex" }}>
               <Box width="100%">
                 <Text>I am looking for: </Text>
               </Box>
               <Select placeholder="">
                 <option>Apartments</option>
                 <option>Rooms</option>
-                <option></option>
+                {/* <option></option> */}
               </Select>
               {/* <FormControl> */}
 
@@ -49,11 +38,22 @@ function FilterBar() {
                 <option>United Arab Emirates</option>
                 <option>Nigeria</option>
               </Select>
-              <Select placeholder="Date">
+              {/* <Select placeholder="Date">
                 <option>United Arab Emirates</option>
                 <option>Nigeria</option>
-              </Select>
-              <Input type="email" placeholder="location" textColor={"white"} />
+              </Select> */}
+              <Input type="location" placeholder="Location" />
+              <Box backgroundColor={"gray"}>
+                <DatePicker
+                  isClearable
+                  placeholder="Date"
+                  maxDate={new Date()}
+                  selected={date}
+                  onChange={(d) => {
+                    setDate(d);
+                  }}
+                />
+              </Box>
             </HStack>
           </HStack>
         </Flex>

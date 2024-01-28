@@ -7,43 +7,53 @@ import UserProfile from "../components/UserProfile";
 import CardUser from "../components/CardUser";
 
 function Profile() {
-  const { user } = useAuth();
-  const [userData, setUserData] = useState(null);
+  // const { user, updateUser } = useAuth();
+  // const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (user) {
-          // Create a reference to the user's document in the 'users' collection
-          const userDocRef = doc(db, "users", user.uid);
+  // const fetchUserData = async () => {
+  //   try {
+  //     if (user) {
+  //       // Create a reference to the user's document in the 'users' collection
+  //       const userDocRef = doc(db, "users", user.uid);
 
-          // Fetch the document data from Firestore
-          const userDocSnapshot = await getDoc(userDocRef);
+  //       // Fetch the document data from Firestore
+  //       const userDocSnapshot = await getDoc(userDocRef);
 
-          if (userDocSnapshot.exists()) {
-            // If the document exists, update the user information
-            const userData = userDocSnapshot.data();
-            setUserData(userData);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+  //       if (userDocSnapshot.exists()) {
+  //         // If the document exists, update the user information
+  //         const userData = userDocSnapshot.data();
+  //         updateUser({
+  //           ...user,
+  //           // Add the additional fields from the user's document
+  //           age: userData.age,
+  //           gender: userData.gender,
+  //           university: userData.university,
+  //           bio: userData.bio,
+  //           // Add more fields as needed
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
 
-    fetchUserData();
-  }, [user]);
+  // useEffect(() => {
+  //   fetchUserData();
+  // }, []);
 
-  console.log(userData);
+  // console.log(userData);
+
   return (
     <>
       {/* NavBar */}
       <Navbar />
 
       {/* Profile Card (Name, Gender, Age, Email) */}
+      {/* <CardUser user= {userData}/> */}
       <CardUser />
 
-      <div>
+      {/* <div>
         {user ? (
           <div>
             <p>User Information:</p>
@@ -56,14 +66,14 @@ function Profile() {
                 <p>Gender: {userData.gender}</p>
                 <p>University: {userData.university}</p>
                 <p>Bio: {userData.bio}</p>
-                {/* Add more fields as needed */}
+                
               </div>
             )}
           </div>
         ) : (
           <p>No user logged in.</p>
         )}
-      </div>
+      </div> */}
     </>
   );
 }

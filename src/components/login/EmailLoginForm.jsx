@@ -22,11 +22,13 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { useAuth } from "../AuthContext";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 export const EmailLoginForm = () => {
+  const { user, updateUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -38,7 +40,7 @@ export const EmailLoginForm = () => {
   const handleSignInWithEmail = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
+      updateUser(auth.currentUser);
       // Check if the user exists in Firestore
       const userRef = doc(db, "users", auth.currentUser.uid);
       const userDoc = await getDoc(userRef);

@@ -1,18 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import {
-  Container,
-  Box,
   Center,
-  Text,
   Stack,
-  useStatStyles,
-  useEditable,
 } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
-import FilterBar from "../components/FilterBar";
+// import FilterBar from "../components/FilterBar";
 import CardListing from "../components/CardListing";
-import { db, collection, doc, getDocs, query } from "../config/firebase";
+import { db, collection, getDocs, query } from "../config/firebase";
 
 function ListingsTest() {
   const [listings, setListings] = useState([]);

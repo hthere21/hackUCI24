@@ -9,6 +9,7 @@ const apartmentData = [
     floor_plan: "Studio - 3 beds",
     price: "$2,877 - $4,977",
     imageUrl: "https://www.irvinecompany.com/images/apartments-1-1080x720.webp",
+    description: "fake description, lorem ipsum"
   },
   {
     id: 2,
