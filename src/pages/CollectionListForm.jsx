@@ -25,7 +25,8 @@ import {
   Box,
   NumberInput,
   NumberInputField,
-  Textarea,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
@@ -44,6 +45,7 @@ const CollectionListForm = () => {
   const [type, setType] = useState("");
   const [zip, setZip] = useState("");
   const [error, setError] = useState(null);
+  const [alert, setAlert] = useState(false);
   const navigate = useNavigate();
 
   const [image, setImage] = useState(null); // State to store the selected image file
@@ -92,7 +94,6 @@ const CollectionListForm = () => {
       const defaultImageUrl =
         "https://www.irvinecompany.com/images/apartments-1-1080x720.webp";
 
-      let email = auth.currentUser.email;
       const geoData = await fetchData(generateMelissaUrl());
       let latitude = geoData.Records[0].Latitude;
       let longitude = geoData.Records[0].Longitude;
@@ -106,7 +107,6 @@ const CollectionListForm = () => {
         city: formattedCity,
         description,
         end: Timestamp.fromDate(new Date(end)),
-        email,
         imageUrl: defaultImageUrl, // Default image URL
         name,
         price: Number(price),
@@ -155,11 +155,11 @@ const CollectionListForm = () => {
       setState("");
       setType("");
       setZip("");
-
+      setAlert(false);
       navigate("/manage-sublets");
     } catch (error) {
       console.error("Error adding listing:", error);
-      // Handle error
+      setAlert(true);
     }
   };
 
@@ -233,10 +233,11 @@ const CollectionListForm = () => {
     "Wisconsin",
     "Wyoming",
   ];
-  // console.log(start);
+  // console.log(alert);
   return (
     <>
       <Navbar />
+
       <Container maxW={"-moz-max-content"} p={0}>
         <Box
           position="relative"
@@ -268,7 +269,21 @@ const CollectionListForm = () => {
             minH={80}
           >
             <Stack>
-              {" "}
+              {alert ? (
+                <Center>
+                  <Alert status="error">
+                    <AlertIcon />
+                    There was an error processing your request
+                  </Alert>
+                </Center>
+              ) : (
+                <Center>
+                  <Alert status="success" variant="subtle">
+                    <AlertIcon />
+                    Data uploaded to the server. Fire on!
+                  </Alert>
+                </Center>
+              )}
               <Box
                 paddingTop={10}
                 backgroundImage={
@@ -374,9 +389,8 @@ const CollectionListForm = () => {
 
                     <FormControl mt={4}>
                       <FormLabel>Description</FormLabel>
-
-                      <Textarea
-                        placeholder="Write a short description about your listing"
+                      <Input
+                        type="text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                       />
@@ -428,6 +442,7 @@ const CollectionListForm = () => {
           </Center>
         </Box>
       </Container>
+
       {/* backgroundColor={"#9eadc1"} */}
     </>
   );
