@@ -20,6 +20,7 @@ import {
   Heading,
   Button,
   Center,
+  Spinner,
   ModalOverlay,
   useDisclosure,
   Modal,
@@ -163,7 +164,15 @@ const CardUser = () => {
   };
 
   if (loading) {
-    return <div> Loading... </div>;
+    return (
+      <Center>
+      
+        <Card>
+          <Text>Loading...</Text>
+          <Spinner />
+        </Card>
+      </Center>
+    );
   }
 
   return (
