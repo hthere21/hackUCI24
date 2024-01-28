@@ -25,8 +25,6 @@ import {
   Box,
   NumberInput,
   NumberInputField,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
@@ -269,21 +267,6 @@ const CollectionListForm = () => {
             minH={80}
           >
             <Stack>
-              {alert ? (
-                <Center>
-                  <Alert status="error">
-                    <AlertIcon />
-                    There was an error processing your request
-                  </Alert>
-                </Center>
-              ) : (
-                <Center>
-                  <Alert status="success" variant="subtle">
-                    <AlertIcon />
-                    Data uploaded to the server. Fire on!
-                  </Alert>
-                </Center>
-              )}
               <Box
                 paddingTop={10}
                 backgroundImage={
