@@ -8,17 +8,17 @@ export const SearchBar = () => {
   return (
     <>
       <InputGroup borderRadius={5} size="lg">
-        {/* <Input
+        <Input
           type="text"
           placeholder="Zip code: e.g 92614"
           border="1px solid #FFFFFF"
           color={"#9eadc1"}
-        /> */}
+        />
         
-        <NumberInput width="100%">
+        {/* <NumberInput width="100%">
             <NumberInputField  placeholder="Zip code: e.g 92614" border="1px solid #FFFFFF"
           color={"#9eadc1"}/>
-          </NumberInput>
+          </NumberInput> */}
         <InputRightAddon p={0} border="none">
           <Button
             size="md"

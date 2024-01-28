@@ -126,7 +126,7 @@ function ListingWithMap() {
           </Card>
 
           <AspectRatio ratio={16 / 9}>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6642.805457267031!2d-117.84769245296229!3d33.64672532470028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcde0e2592bf91%3A0x79fbc5d0b6dab7ec!2sUniversity%20of%20California%2C%20Irvine!5e0!3m2!1sen!2sus!4v1706416273132!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6642.805457267031!2d-117.84769245296229!3d33.64672532470028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcde0e2592bf91%3A0x79fbc5d0b6dab7ec!2sUniversity%20of%20California%2C%20Irvine!5e0!3m2!1sen!2sus!4v1706416273132!5m2!1sen!2sus'></iframe>
           </AspectRatio>
         </GridItem>
       ) : (
