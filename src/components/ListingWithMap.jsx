@@ -23,6 +23,9 @@ function ListingWithMap() {
       if (element.id === id) {
         setElement(element);
       }
+      else {
+        setElement(null);
+      }
     });
   };
   // console.log(selectedElement);
@@ -77,7 +80,7 @@ function ListingWithMap() {
       </GridItem>
 
       {/* Detailed Property */}
-      {(selectedElement == null) ? (
+      {(selectedElement) ? (
               <GridItem w="100%" h="10">
               <Image
                 objectFit="cover"
