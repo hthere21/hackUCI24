@@ -90,6 +90,9 @@ const CollectionListForm = () => {
       let latitude = geoData.Records[0].Latitude;
       let longitude = geoData.Records[0].Longitude;
 
+      setCity(city.replace(/\W/g, "").toLowerCase);
+      setState(state.toLowerCase());
+
       let newListing = {
         address,
         city,

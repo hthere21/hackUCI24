@@ -7,6 +7,7 @@ import {
   getDocs,
   setDoc,
   query,
+  where,
 } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
@@ -56,5 +57,6 @@ export {
   getDoc,
   getDocs,
   query,
+  where,
 };
 // const analytics = getAnalytics(app);
