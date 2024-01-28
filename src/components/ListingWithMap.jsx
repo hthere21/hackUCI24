@@ -31,9 +31,9 @@ function ListingWithMap({
   listings,
   showDeleteButton,
   setUserListings,
-  selectedListingId = "0Myi1lJDPmuXwicvFUjP",
+  selectedListingId = null,
 }) {
-  console.log(selectedListingId);
+  // console.log(selectedListingId);
   const [selectedElement, setElement] = useState(null);
 
   const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" />;
@@ -42,18 +42,17 @@ function ListingWithMap({
   const [overlay, setOverlay] = useState(<OverlayOne />);
 
   const showClickedCard = (id) => {
-    listings.filter((element) => {
-      if (element.id === id) {
-        setElement(element);
-      }
-    });
+    const foundElement = listings.find((element) => element.id === id);
+    if (foundElement) {
+      setElement(foundElement);
+    }
   };
 
   useEffect(() => {
     if (selectedListingId) {
       showClickedCard(selectedListingId);
     }
-  }, [selectedListingId]);
+  }, [selectedListingId, listings]);
 
   const [isLiked, setLiked] = useState(false);
 

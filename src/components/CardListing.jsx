@@ -7,13 +7,20 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
 function CardListing(props) {
-  const { id, name, address, city, state, zipcode, type, price, imageUrl } = props;
+  const { id, name, address, type, price, imageUrl } = props;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/allListings/${id}`);
+  };
+
   return (
     <>
-      <Card maxW="sm" _hover={{ bg: "gray.200" }}>
+      <Card maxW="sm" _hover={{ bg: "gray.200" }} onClick={handleClick}>
         <CardBody>
           <Image
             src={imageUrl}
@@ -27,9 +34,9 @@ function CardListing(props) {
             <Text>
               {address}
               <br />
-              {city}, {state} {zipcode}
-              <br />
-              {type} | {price}
+              {/* {city}, {state} {zipcode} */}
+              {/* <br /> */}
+              {type} | ${price}
             </Text>
           </Stack>
         </CardBody>

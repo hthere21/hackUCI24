@@ -1,6 +1,13 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  limit,
+  db,
+} from "../config/firebase";
 import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
 import { Text, Center, Button, Stack } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import ImageOverlay from "../components/ImageOverlay";
@@ -8,8 +15,33 @@ import CardListing from "../components/CardListing";
 import apartmentData from "../fakeApartmentData";
 
 function Landing() {
-  //   const [login, setLogin] = useState(false);
+  const [listings, setListings] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      // Query to fetch listings where city is "irvine"
+      const listingsQuery = query(
+        collection(db, "listings"),
+        where("city", "==", "irvine"),
+        limit(4)
+      );
+
+      try {
+        const querySnapshot = await getDocs(listingsQuery);
+        const fetchedListings = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setListings(fetchedListings);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
   return (
     <>
       {/* Navigation bar */}
@@ -29,16 +61,13 @@ function Landing() {
       {/* get 4 cards and map it to CardListing component */}
       <Center>
         <Stack flexDirection={"row"} spacing={6}>
-          {apartmentData.map((element) => (
+          {listings.map((element) => (
             <CardListing
               key={element.id}
-              id = {element.id}
+              id={element.id}
               name={element.name}
               address={element.address}
-              city={element.city}
-              state={element.state}
-              zipcode={element.zipcode}
-              floor_plan={element.floor_plan}
+              type={element.type}
               price={element.price}
               imageUrl={element.imageUrl}
             />
