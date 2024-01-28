@@ -109,9 +109,10 @@ function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
                 <Heading fontSize={"3xl"}>{element.name}</Heading>
                 <Text fontSize={"lg"} color={"gray"} marginBottom={4}>
                   {element.address}
+                  {/* {" " + element.city.charAt(0).toUpperCase() + element.city.slice(1)} */}
                 </Text>
                 <Text fontSize={"lg"} marginBottom={1}>
-                  Prices: {element.price}
+                  Price: ${element.price}
                 </Text>
                 <Text fontSize={"lg"} marginBottom={1}>
                   Description: {element.type}
@@ -148,9 +149,7 @@ function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
                     <ModalContent>
                       <ModalHeader>Lister Info</ModalHeader>
                       <ModalCloseButton />
-                      <ModalBody alignItems={"center"}>
-                        email: kaylason8263@gmail.com
-                      </ModalBody>
+                      <ModalBody alignItems={"center"}></ModalBody>
 
                       <ModalFooter>
                         <Button
@@ -212,7 +211,7 @@ function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
           </Text>
 
           <Card>
-            <Heading marginLeft={3}>About the Place</Heading>
+            <Heading marginLeft={3}>About This Sublet</Heading>
 
             <CardBody>
               <Text> Price: {selectedElement.price}</Text>
