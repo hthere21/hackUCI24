@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { Box, Button, Flex, Heading, Spacer, Center } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Link,
+  Heading,
+  Spacer,
+  Center,
+  textDecoration,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 import { useAuth } from "./AuthContext";
@@ -45,9 +54,16 @@ function Navbar() {
 
           {/* Logo and Brand Name */}
           <Center>
-            <Heading fontFamily={"Brush Script MT"} size="2xl" fontWeight="bold">
-              ZotLease
-            </Heading>
+            <Link textDecoration={"none"}>
+              <Heading
+                fontFamily={"Brush Script MT"}
+                size="2xl"
+                fontWeight="bold"
+                onClick={() => navigate("/home")}
+              >
+                ZotLease
+              </Heading>
+            </Link>
           </Center>
 
           <Spacer />
