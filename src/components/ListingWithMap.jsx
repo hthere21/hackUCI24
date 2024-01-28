@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import HeartButton from "./HeartButton";
 
-
 import { Map, Marker } from "pigeon-maps";
 
 import {
@@ -16,7 +15,7 @@ import {
   Center,
   CardFooter,
   Button,
-  Modal
+  Modal,
 } from "@chakra-ui/react";
 
 function ListingWithMap({ listings }) {
@@ -84,7 +83,9 @@ function ListingWithMap({ listings }) {
               <Center>
                 <CardFooter>
                   <Button variant="solid" colorScheme="teal">
-                      <a href={`mailto:${elementSelected.email}`}>Contact Lister</a>
+                    <a href={`mailto:${selectedElement.email}`}>
+                      Contact Lister
+                    </a>
                   </Button>
 
                   {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
@@ -94,7 +95,7 @@ function ListingWithMap({ listings }) {
                     />
                   </Button> */}
                   <Button>
-                    <HeartButton id={element.id}/>
+                    <HeartButton id={element.id} />
                   </Button>
                 </CardFooter>
               </Center>
@@ -122,7 +123,9 @@ function ListingWithMap({ listings }) {
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
-            <Button marginLeft={5}><HeartButton /></Button>
+            <Button marginLeft={5}>
+              <HeartButton />
+            </Button>
           </Heading>
 
           <Text marginLeft={3} marginBottom={3} fontSize="2xl">

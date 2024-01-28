@@ -28,36 +28,22 @@ function FilterBar({ searchParameters }) {
   useEffect(() => {
     if (parameters.type) {
       setType(parameters.type);
-      // console.log("setType", type);
     }
     if (parameters.price) {
       setPrice(parameters.price);
-      // console.log("setPrice", price);
     }
     if (parameters.city) {
       setLocation(parameters.city);
-      // console.log("setCity", location);
     }
     if (parameters.start) {
       setStart(parameters.start);
-      // console.log("setDate", date);
     }
     if (parameters.end) {
       setStart(parameters.end);
-      // console.log("setDate", date);
     }
   }, [parameters]);
 
   const handleFilterClicked = () => {
-    // let cityParam = `city=${encodeURIComponent(location)}`;
-    // let priceParam = `price=${encodeURIComponent(price)}`;
-    // let typeParam = `type=${encodeURIComponent(type)}`;
-    // let startParam = `start=${encodeURIComponent(start)}`;
-    // let endParam = `end=${encodeURIComponent(end)}`;
-    // navigate(
-    //   `/search/?${cityParam}&${priceParam}&${typeParam}&${startParam}&${endParam}`
-    // );
-
     let queryParams = [];
 
     if (location) {
