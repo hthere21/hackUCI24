@@ -123,6 +123,7 @@ function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
               <Center>
                 <CardFooter>
                   <Button
+                    marginRight={3}
                     onClick={() => {
                       setOverlay(<OverlayOne />);
                       onOpen();
@@ -136,6 +137,7 @@ function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
                   {/* Conditionally render delete button */}
                   {showDeleteButton && (
                     <Button
+                      marginRight={3}
                       onClick={() => handleDeleteListing(element.id)}
                       variant="solid"
                       colorScheme="red"
@@ -149,7 +151,12 @@ function ListingWithMap({ listings, showDeleteButton, setUserListings }) {
                     <ModalContent>
                       <ModalHeader>Lister Info</ModalHeader>
                       <ModalCloseButton />
-                      <ModalBody alignItems={"center"}></ModalBody>
+                      <ModalBody alignItems={"center"}>
+                        <Text>
+                          email:{" "}
+                          {selectedElement ? selectedElement.email : null}
+                        </Text>
+                      </ModalBody>
 
                       <ModalFooter>
                         <Button

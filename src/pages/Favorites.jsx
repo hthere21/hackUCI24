@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import ListingWithMap from "../components/ListingWithMap";
+import LoadingCard from "../components/login/LoadingCard";
 import { Box, Button, Text, Heading, Center, Image } from "@chakra-ui/react";
 import {
   doc,
@@ -132,7 +133,7 @@ function Favorites() {
       </Center>
 
       {loading ? (
-        <p>Loading...</p>
+        <LoadingCard />
       ) : (
         <>
           {filteredApartments.map((listing) => (
