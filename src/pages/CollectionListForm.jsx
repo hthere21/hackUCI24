@@ -26,7 +26,6 @@ import {
   Box,
   NumberInput,
   NumberInputField,
-  Textarea,
 } from "@chakra-ui/react";
 
 // Initialize Firebase Storage
