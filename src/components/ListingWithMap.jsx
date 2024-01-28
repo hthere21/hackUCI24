@@ -1,3 +1,8 @@
+import ReactDOM from "react-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import HeartButton from "./HeartButton";
+
 import React from "react";
 import { useState } from "react";
 import apartmentData from "../fakeApartmentData";
@@ -18,7 +23,9 @@ import {
   CardFooter,
   Button,
   AspectRatio,
+  AspectRatio,
 } from "@chakra-ui/react";
+
 
 function ListingWithMap() {
   const [selectedElement, setElement] = useState(null);
@@ -26,7 +33,7 @@ function ListingWithMap() {
   const baseMapUrl = "https://www.google.com/maps/";
 
   const showClickedCard = (id) => {
-    apartmentData.filter((element) => {
+    listings.filter((element) => {
       if (element.id === id) {
         setElement(element);
       }
@@ -38,7 +45,7 @@ function ListingWithMap() {
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
       {/* All the card listings */}
       <GridItem w="100%" h="10">
-        {apartmentData.map((element) => (
+        {listings.map((element) => (
           <Card
             key={element.id}
             direction={{ base: "column", sm: "row" }}
@@ -65,7 +72,7 @@ function ListingWithMap() {
                   {element.price}
                 </Text>
                 <Text fontSize={"lg"} marginBottom={1}>
-                  {element.floor_plan}
+                  {element.type}
                 </Text>
                 <Text fontSize={"lg"}>
                   Pet friendly, Non-smoking, Clean, Fitness Building
@@ -78,8 +85,8 @@ function ListingWithMap() {
                     Contact Lister
                   </Button>
 
-                  <Button marginLeft={3}>
-                    <HeartButton />
+                  <Button marginLeft={3}> 
+                    <HeartButton/>
                   </Button>
                 </CardFooter>
               </Center>
@@ -100,9 +107,9 @@ function ListingWithMap() {
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
-            <Button marginLeft={5}>
-              <HeartButton />
-            </Button>
+            <Button marginLeft={5}> 
+              <HeartButton/>
+             </Button>
           </Heading>
 
           <Text marginLeft={3} marginBottom={3} fontSize="2xl">
