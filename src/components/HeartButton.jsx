@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { doc, getDoc, getFirestore, updateDoc } from "../config/firebase";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  getFirestore,
+  updateDoc,
+} from "../config/firebase";
 import {
   faHeart as solidHeart,
   faHeart as regularHeart,
@@ -13,54 +19,69 @@ const HeartButton = ({ id }) => {
   const [userLikedArray, setUserLikedArray] = useState([]);
   const [isLiked, setLiked] = useState(false);
   const [isLoading, setLoading] = useState(false);
+
   const fetchUserLikedArray = async () => {
     if (user) {
       const db = getFirestore();
-      const userDocRef = doc(db, "liked", user.uid);
+      const userDocRef = doc(db, "users", user.uid);
 
       try {
-        setLoading(true);
         const userDocSnapshot = await getDoc(userDocRef);
 
         if (userDocSnapshot.exists()) {
           const likedArray = userDocSnapshot.data().liked || [];
           setUserLikedArray(likedArray);
 
-          // Check if cardId is in the likedArray
-          const cardIsLiked = likedArray.includes(cardId);
-          setLiked(cardIsLiked);
+          // Set initial isLiked based on whether cardId is in the likedArray
+          setLiked(likedArray.includes(cardId));
+        } else {
+          // If the document doesn't exist, create it with an empty 'liked' array
+          await setDoc(userDocRef, { liked: [] }, { merge: true });
         }
       } catch (error) {
-        console.error("Error fetching user liked array:", error);
-      } finally {
-        setLoading(false);
+        console.error("Error fetching/updating user document:", error);
       }
     }
   };
-  
+
   useEffect(() => {
     fetchUserLikedArray();
   }, [user, cardId]);
 
-  const handleLikeToggle = () => {
+  const handleLikeToggle = async () => {
     if (isLoading) return; // Avoid toggling when still loading
+
+    setLoading(true);
 
     // Update the Firestore document when the button is clicked
     const db = getFirestore();
-    const userDocRef = doc(db, "liked", user.uid);
+    const userDocRef = doc(db, "users", user.uid);
 
-    // Toggle isLiked state
-    setLiked(!isLiked);
+    try {
+      const userDocSnapshot = await getDoc(userDocRef);
 
-    // Update the Firestore document with the new likedArray
-    const updatedLikedArray = isLiked
-      ? userLikedArray.filter((itemId) => itemId !== cardId)
-      : [...userLikedArray, cardId];
+      if (userDocSnapshot.exists()) {
+        const likedArray = userDocSnapshot.data().liked || [];
 
-    // Update the likedArray in Firestore
-    updateDoc(userDocRef, { liked: updatedLikedArray }).catch((error) => {
+        // Check if cardId is in the likedArray
+        const cardIsLiked = likedArray.includes(cardId);
+
+        // Update the Firestore document with the new likedArray
+        const updatedLikedArray = cardIsLiked
+          ? likedArray.filter((itemId) => itemId !== cardId)
+          : [...likedArray, cardId];
+
+        // Toggle isLiked state
+        setLiked(!cardIsLiked);
+
+        // Update the likedArray in Firestore
+        await updateDoc(userDocRef, { liked: updatedLikedArray });
+      }
+    } catch (error) {
       console.error("Error updating user liked array:", error);
-    });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
