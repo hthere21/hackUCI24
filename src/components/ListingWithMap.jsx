@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import HeartButton from "./HeartButton";
 
-import React from "react";
-import { useState } from "react";
+
 import { Map, Marker } from "pigeon-maps";
 
 import {
@@ -25,6 +25,16 @@ function ListingWithMap({ listings }) {
     listings.filter((element) => {
       if (element.id === id) {
         setElement(element);
+      }
+    });
+  };
+
+  const [isLiked, setLiked] = useState(false);
+
+  const handleLikeToggle = (id) => {
+    listings.filter((element) => {
+      if (element.id === id) {
+        setLiked(!isLiked);
       }
     });
   };
@@ -76,9 +86,15 @@ function ListingWithMap({ listings }) {
                     Contact Lister
                   </Button>
 
-                  <Button marginLeft={3}>
-                    <HeartButton />
-                  </Button>
+                  {/* <Button marginLeft={3} onClick={() => handleLikeToggle(element.id)}>
+                    <FontAwesomeIcon
+                      icon={isLiked ? solidHeart : regularHeart}
+                      color={isLiked ? "red" : "black"}
+                    />
+                  </Button> */}
+                  {/* <Button> */}
+                    <HeartButton id={element.id}/>
+                  {/* </Button> */}
                 </CardFooter>
               </Center>
             </Stack>
@@ -105,9 +121,7 @@ function ListingWithMap({ listings }) {
           />
           <Heading marginTop={3} marginLeft={3} fontSize="6xl">
             {selectedElement.name}
-            <Button marginLeft={5}>
-              <HeartButton />
-            </Button>
+            <Button marginLeft={5}>{/* <HeartButton /> */}</Button>
           </Heading>
 
           <Text marginLeft={3} marginBottom={3} fontSize="2xl">
