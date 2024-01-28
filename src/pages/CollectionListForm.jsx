@@ -220,8 +220,8 @@ const CollectionListForm = () => {
   return (
     <>
       <Navbar />
-      <Box backgroundColor={"#9eadc1"}>
-        <Center marginTop={10}>
+      <Box paddingTop={10} backgroundColor={"#9eadc1"}>
+        <Center backgroundColor={"#9eadc1"}>
           <Heading>Listing Form</Heading>
         </Center>
         <Center>
@@ -333,11 +333,11 @@ const CollectionListForm = () => {
               <Input type="file" onChange={handleImageChange} />
             </FormControl>
 
-            <Button mt={4} colorScheme="teal" onClick={handleAddListing}>
+            <Button mt={4} colorScheme="teal" onClick={handleAddListing} borderRadius={15}>
               Add Listing
             </Button>
 
-            <Button mt={4} colorScheme="blue" onClick={handleClearAndGoBack}>
+            <Button mt={4} colorScheme="blue" onClick={handleClearAndGoBack} borderRadius={15}>
               Go Back
             </Button>
           </Card>
