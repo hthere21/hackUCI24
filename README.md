@@ -16,6 +16,8 @@ ZotLease was crafted using a blend of front-end and back-end technologies. The w
 
 **Getting Started with Create React App**
 
+- git clone the project from github page
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 - Available Scripts
