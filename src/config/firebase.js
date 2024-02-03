@@ -27,13 +27,7 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCcJoM8zAIxD4Vwb_n7QeUNzrM-uKX_bew",
-  authDomain: "hackuci2024.firebaseapp.com",
-  projectId: "hackuci2024",
-  storageBucket: "hackuci2024.appspot.com",
-  messagingSenderId: "389859786270",
-  appId: "1:389859786270:web:df926aa4204a9e3033780f",
-  measurementId: "G-5DNSH3R72J",
+  //Add your own config
 };
 
 const app = initializeApp(firebaseConfig);
