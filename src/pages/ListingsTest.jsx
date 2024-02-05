@@ -16,7 +16,6 @@ function ListingsTest() {
     const fetchData = async () => {
       const fetchedItems = await fetchListings();
       setListings(fetchedItems);
-      // console.log(listings);
     };
 
     fetchData();

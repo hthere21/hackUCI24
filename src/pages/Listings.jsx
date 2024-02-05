@@ -92,13 +92,10 @@ function Listings() {
 
       // Fetch and process the results of each query
       const allResults = await Promise.all(promises);
-      // console.log("all results", allResults);
 
       let resultsForEachQuery = allResults.map((querySnapshot) =>
         querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
       );
-
-      // console.log("Results for each query:", resultsForEachQuery);
 
       // Check if there are no results from any query
       if (resultsForEachQuery.some((results) => results.length === 0)) {
@@ -115,7 +112,6 @@ function Listings() {
         );
       }
 
-      // console.log("Intersected listings:", intersection);
       return intersection;
     } catch (err) {
       console.error(err);

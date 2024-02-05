@@ -192,17 +192,6 @@ const Chat = (props) => {
                 >
                   {message.message}
                 </Text>
-                {/* <span
-                style={{
-                  marginLeft: "8px",
-                  fontSize: "0.8em",
-                  color: "#6c757d",
-                }}
-              >
-                {new Date(
-                  message.timestamp?.seconds * 1000
-                ).toLocaleTimeString()}
-              </span> */}
               </Box>
             ))}
             <div ref={messagesEndRef}></div>
