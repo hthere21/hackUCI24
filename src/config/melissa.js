@@ -1,1 +1,1 @@
-export const key = "Yzlw5DwqmUTjsdHvq0WG9k**nSAcwXpxhQ0PC2lXxuDAZ-**";
+export const key = process.env.REACT_APP_MELISSA_API_KEY
