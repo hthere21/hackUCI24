@@ -174,7 +174,7 @@ function ListingWithMap({
                           variant="solid"
                           colorScheme="teal"
                           onClick={() =>
-                            (window.location = "mailto:kaylason8263@gmail.com")
+                            (window.location = selectedElement ? selectedElement.email : null)
                           }
                         >
                           Contact Now
